@@ -5,7 +5,9 @@ apis:
   - aid: jetic:jetic
     name: Jetic
     tags:
-      - API
+      - Integrations
+      - iPaaS
+      - Apache Camel
     humanURL: ' https://jetic.io/'
     properties:
       - url: ' https://jetic.io/'
