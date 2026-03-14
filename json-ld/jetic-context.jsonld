@@ -1,0 +1,78 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "jetic": "https://docs.jetic.io/docs/",
+    "Integration": {
+      "@id": "jetic:integrations",
+      "@context": {
+        "name": "https://schema.org/name",
+        "description": "https://schema.org/description",
+        "status": "https://schema.org/status",
+        "routes": {
+          "@id": "jetic:routes",
+          "@type": "@id"
+        },
+        "gitRepository": "https://schema.org/codeRepository",
+        "createdAt": "https://schema.org/dateCreated",
+        "updatedAt": "https://schema.org/dateModified"
+      }
+    },
+    "Route": {
+      "@id": "jetic:routes",
+      "@context": {
+        "name": "https://schema.org/name",
+        "from": "https://schema.org/source",
+        "to": "https://schema.org/target",
+        "processors": "https://schema.org/softwareRequirements"
+      }
+    },
+    "Deployment": {
+      "@id": "jetic:deployments",
+      "@context": {
+        "integrationId": {
+          "@id": "jetic:integrations",
+          "@type": "@id"
+        },
+        "integrationName": "https://schema.org/name",
+        "clusterId": {
+          "@id": "jetic:clusters",
+          "@type": "@id"
+        },
+        "clusterName": "https://schema.org/name",
+        "status": "https://schema.org/status",
+        "environment": "https://schema.org/category",
+        "version": "https://schema.org/softwareVersion",
+        "deployedAt": "https://schema.org/dateCreated",
+        "updatedAt": "https://schema.org/dateModified"
+      }
+    },
+    "Cluster": {
+      "@id": "jetic:clusters",
+      "@context": {
+        "name": "https://schema.org/name",
+        "provider": "https://schema.org/provider",
+        "region": "https://schema.org/locationCreated",
+        "camelBridgeStatus": "https://schema.org/status",
+        "kubernetesVersion": "https://schema.org/softwareVersion",
+        "deploymentCount": "https://schema.org/quantity",
+        "createdAt": "https://schema.org/dateCreated"
+      }
+    },
+    "ApiSpecification": {
+      "@id": "jetic:api-specifications",
+      "@context": {
+        "name": "https://schema.org/name",
+        "description": "https://schema.org/description",
+        "version": "https://schema.org/softwareVersion",
+        "openApiVersion": "https://schema.org/schemaVersion",
+        "paths": "https://schema.org/quantity",
+        "integrationId": {
+          "@id": "jetic:integrations",
+          "@type": "@id"
+        },
+        "createdAt": "https://schema.org/dateCreated",
+        "updatedAt": "https://schema.org/dateModified"
+      }
+    }
+  }
+}

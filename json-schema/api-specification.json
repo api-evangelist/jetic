@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/jetic/blob/main/json-schema/api-specification.json",
+  "title": "Jetic API Specification",
+  "description": "An API Specification represents an OpenAPI document managed through the Jetic API Builder, which can be linked to an integration for generating REST API endpoints.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique specification identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the API specification."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the API."
+    },
+    "version": {
+      "type": "string",
+      "description": "API version string."
+    },
+    "openApiVersion": {
+      "type": "string",
+      "enum": [
+        "3.0",
+        "3.1"
+      ],
+      "description": "OpenAPI specification version."
+    },
+    "paths": {
+      "type": "integer",
+      "description": "Number of paths defined in the specification."
+    },
+    "integrationId": {
+      "type": "string",
+      "description": "Associated integration identifier."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the specification was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the specification was last updated."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

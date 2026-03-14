@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/jetic/blob/main/json-schema/integration.json",
+  "title": "Jetic Integration",
+  "description": "An Integration represents a Camel-based integration project containing routes, configurations, and an optional Git repository connection for building and deploying data flows on Kubernetes.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the integration."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the integration project."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the integration."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "deployed",
+        "stopped",
+        "error"
+      ],
+      "description": "Current status of the integration."
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "$ref": "route.json"
+      },
+      "description": "Camel routes defined within this integration."
+    },
+    "gitRepository": {
+      "type": "string",
+      "description": "Connected Git repository URL."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the integration was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the integration was last updated."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/jetic/blob/main/json-schema/deployment.json",
+  "title": "Jetic Deployment",
+  "description": "A Deployment represents a running instance of an integration on a connected Kubernetes cluster, managed through the Camel Bridge operator.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique deployment identifier."
+    },
+    "integrationId": {
+      "type": "string",
+      "description": "Associated integration identifier."
+    },
+    "integrationName": {
+      "type": "string",
+      "description": "Name of the deployed integration."
+    },
+    "clusterId": {
+      "type": "string",
+      "description": "Target cluster identifier."
+    },
+    "clusterName": {
+      "type": "string",
+      "description": "Name of the target cluster."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "building",
+        "stopped",
+        "error"
+      ],
+      "description": "Current deployment status."
+    },
+    "environment": {
+      "type": "string",
+      "enum": [
+        "development",
+        "staging",
+        "production"
+      ],
+      "description": "Target deployment environment."
+    },
+    "version": {
+      "type": "string",
+      "description": "Deployed version."
+    },
+    "deployedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the deployment was initiated."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the deployment was last updated."
+    }
+  },
+  "required": [
+    "integrationId",
+    "clusterId"
+  ]
+}

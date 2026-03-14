@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/jetic/blob/main/json-schema/cluster.json",
+  "title": "Jetic Cluster",
+  "description": "A Cluster represents a connected Kubernetes cluster with the Camel Bridge operator installed, serving as a deployment target for integrations.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique cluster identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the cluster."
+    },
+    "provider": {
+      "type": "string",
+      "description": "Cloud provider or infrastructure type."
+    },
+    "region": {
+      "type": "string",
+      "description": "Cluster region."
+    },
+    "camelBridgeStatus": {
+      "type": "string",
+      "enum": [
+        "connected",
+        "disconnected",
+        "error"
+      ],
+      "description": "Status of the Camel Bridge operator on this cluster."
+    },
+    "kubernetesVersion": {
+      "type": "string",
+      "description": "Kubernetes version running on the cluster."
+    },
+    "deploymentCount": {
+      "type": "integer",
+      "description": "Number of active deployments on this cluster."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the cluster was registered."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

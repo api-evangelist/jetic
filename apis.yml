@@ -16,6 +16,18 @@ apis:
         type: Documentation
       - url: openapi/jetic-platform-openapi.yml
         type: OpenAPI
+      - url: json-schema/integration.json
+        type: JSONSchema
+      - url: json-schema/route.json
+        type: JSONSchema
+      - url: json-schema/deployment.json
+        type: JSONSchema
+      - url: json-schema/cluster.json
+        type: JSONSchema
+      - url: json-schema/api-specification.json
+        type: JSONSchema
+      - url: json-ld/jetic-context.jsonld
+        type: JSONLD
     description: >-
       The Jetic Platform API provides programmatic access to manage integrations,
       deployments, clusters, and API specifications on the Jetic cloud-native

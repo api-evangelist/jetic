@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/jetic/blob/main/json-schema/route.json",
+  "title": "Jetic Route",
+  "description": "A Route defines an Apache Camel integration flow with a source component, one or more destination components, and optional enterprise integration pattern processors.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique route identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the route."
+    },
+    "from": {
+      "type": "string",
+      "description": "Source Camel component URI."
+    },
+    "to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Destination Camel component URIs."
+    },
+    "processors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Enterprise integration pattern processors applied to the route."
+    }
+  }
+}
