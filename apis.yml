@@ -2,20 +2,25 @@ aid: jetic
 url: >-
   https://raw.githubusercontent.com/api-evangelist/jetic/refs/heads/main/apis.yml
 apis:
-  - aid: jetic:jetic
-    name: Jetic
+  - aid: jetic:platform-api
+    name: Jetic Platform API
     tags:
       - Integrations
       - iPaaS
       - Apache Camel
-    humanURL: ' https://jetic.io/'
+      - Kubernetes
+      - Deployments
+    humanURL: https://docs.jetic.io/docs
     properties:
-      - url: ' https://jetic.io/'
+      - url: https://docs.jetic.io/docs
         type: Documentation
+      - url: openapi/jetic-platform-openapi.yml
+        type: OpenAPI
     description: >-
-      Jetic is the first and only cloud-native API & Integration Platform based
-      on Apache Camel. An iPaaS solution for avoiding costly vendor lock-ins and
-      regaining command of your development - without any drawbacks. 
+      The Jetic Platform API provides programmatic access to manage integrations,
+      deployments, clusters, and API specifications on the Jetic cloud-native
+      Integration Platform. Built on Apache Camel and Kubernetes, it enables
+      users to design, build, deploy, and monitor integrations and REST APIs.
 name: Jetic
 tags:
   - Integrations
@@ -90,7 +95,7 @@ common:
     name: Features
     type: Features
 created: '2025-06-10T00:00:00.000Z'
-modified: '2026-01-02'
+modified: '2026-03-14'
 position: Consumer
 description: >-
   Jetic is the first and only cloud-native API & Integration Platform based on

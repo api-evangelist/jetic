@@ -1,0 +1,980 @@
+openapi: 3.1.0
+info:
+  title: Jetic Platform API
+  description: >-
+    The Jetic Platform API provides programmatic access to manage integrations,
+    deployments, clusters, and API specifications on the Jetic cloud-native
+    Integration Platform. Jetic is built on Apache Camel and Kubernetes,
+    enabling users to design, build, deploy, and monitor integrations and
+    REST APIs.
+  version: 1.0.0
+  contact:
+    name: Jetic
+    url: https://jetic.io/
+  license:
+    name: Proprietary
+    url: https://jetic.io/legal
+servers:
+  - url: https://app.us1.jetic.io/api/v1
+    description: Jetic US1 Production
+externalDocs:
+  description: Jetic Platform Documentation
+  url: https://docs.jetic.io/docs
+security:
+  - bearerAuth: []
+tags:
+  - name: Integrations
+    description: Manage integration projects and routes
+  - name: Deployments
+    description: Deploy and manage integration deployments on Kubernetes
+  - name: Clusters
+    description: Manage connected Kubernetes clusters
+  - name: API Specifications
+    description: Manage OpenAPI specifications via the API Builder
+  - name: Monitoring
+    description: Monitor integration status, logs, and metrics
+paths:
+  /integrations:
+    get:
+      operationId: listIntegrations
+      summary: List integrations
+      description: >-
+        Retrieves a list of all integration projects in the current
+        workspace.
+      tags:
+        - Integrations
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Number of results per page.
+          schema:
+            type: integer
+            default: 20
+        - name: status
+          in: query
+          description: Filter by integration status.
+          schema:
+            type: string
+            enum:
+              - draft
+              - deployed
+              - stopped
+              - error
+      responses:
+        '200':
+          description: A list of integrations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Integration'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: createIntegration
+      summary: Create an integration
+      description: >-
+        Creates a new integration project with Camel routes and
+        configurations.
+      tags:
+        - Integrations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationCreate'
+      responses:
+        '201':
+          description: Integration created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+  /integrations/{integrationId}:
+    get:
+      operationId: getIntegration
+      summary: Get an integration
+      description: Retrieves details for a specific integration project.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '200':
+          description: Integration details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+    put:
+      operationId: updateIntegration
+      summary: Update an integration
+      description: Updates an existing integration project.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationUpdate'
+      responses:
+        '200':
+          description: Integration updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+    delete:
+      operationId: deleteIntegration
+      summary: Delete an integration
+      description: Deletes an integration project and its associated resources.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '204':
+          description: Integration deleted successfully.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+  /integrations/{integrationId}/routes:
+    get:
+      operationId: listIntegrationRoutes
+      summary: List routes for an integration
+      description: >-
+        Retrieves all Camel routes defined within an integration project.
+      tags:
+        - Integrations
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '200':
+          description: A list of routes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Route'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+  /deployments:
+    get:
+      operationId: listDeployments
+      summary: List deployments
+      description: >-
+        Retrieves a list of all integration deployments across connected
+        clusters.
+      tags:
+        - Deployments
+      parameters:
+        - name: clusterId
+          in: query
+          description: Filter deployments by cluster.
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by deployment status.
+          schema:
+            type: string
+            enum:
+              - running
+              - building
+              - stopped
+              - error
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: A list of deployments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Deployment'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          description: Unauthorized.
+  /deployments/{deploymentId}:
+    get:
+      operationId: getDeployment
+      summary: Get a deployment
+      description: Retrieves details and status for a specific deployment.
+      tags:
+        - Deployments
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+      responses:
+        '200':
+          description: Deployment details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Deployment not found.
+    delete:
+      operationId: deleteDeployment
+      summary: Undeploy a deployment
+      description: >-
+        Removes a deployed integration from the Kubernetes cluster.
+      tags:
+        - Deployments
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+      responses:
+        '204':
+          description: Deployment removed successfully.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Deployment not found.
+  /integrations/{integrationId}/deploy:
+    post:
+      operationId: deployIntegration
+      summary: Deploy an integration
+      description: >-
+        Deploys an integration to a connected Kubernetes cluster. The
+        integration is bundled, converted to Camel DSL, and sent to the
+        Camel Bridge on the target cluster.
+      tags:
+        - Deployments
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clusterId
+              properties:
+                clusterId:
+                  type: string
+                  description: The target cluster to deploy to.
+                environment:
+                  type: string
+                  description: Target environment label.
+                  enum:
+                    - development
+                    - staging
+                    - production
+      responses:
+        '202':
+          description: Deployment initiated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '400':
+          description: Invalid request or integration not ready.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: List clusters
+      description: >-
+        Retrieves a list of all connected Kubernetes clusters with their
+        Camel Bridge status.
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: A list of connected clusters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cluster'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: registerCluster
+      summary: Register a cluster
+      description: >-
+        Registers a new Kubernetes cluster by installing the Camel Bridge
+        operator.
+      tags:
+        - Clusters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterCreate'
+      responses:
+        '201':
+          description: Cluster registered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+  /clusters/{clusterId}:
+    get:
+      operationId: getCluster
+      summary: Get cluster details
+      description: >-
+        Retrieves details and status information for a connected Kubernetes
+        cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '200':
+          description: Cluster details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Cluster not found.
+    delete:
+      operationId: removeCluster
+      summary: Remove a cluster
+      description: Disconnects and removes a Kubernetes cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '204':
+          description: Cluster removed successfully.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Cluster not found.
+  /clusters/{clusterId}/status:
+    get:
+      operationId: getClusterStatus
+      summary: Get cluster status
+      description: >-
+        Retrieves the current health and status of the Camel Bridge on a
+        connected cluster.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '200':
+          description: Cluster status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Cluster not found.
+  /api-specifications:
+    get:
+      operationId: listApiSpecifications
+      summary: List API specifications
+      description: >-
+        Retrieves all OpenAPI specifications managed in the API Builder.
+      tags:
+        - API Specifications
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: A list of API specifications.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApiSpecification'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: createApiSpecification
+      summary: Create or import an API specification
+      description: >-
+        Creates a new OpenAPI specification or imports an existing one into
+        the API Builder.
+      tags:
+        - API Specifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiSpecificationCreate'
+      responses:
+        '201':
+          description: API specification created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSpecification'
+        '400':
+          description: Invalid request or specification.
+        '401':
+          description: Unauthorized.
+  /api-specifications/{specificationId}:
+    get:
+      operationId: getApiSpecification
+      summary: Get an API specification
+      description: Retrieves a specific OpenAPI specification.
+      tags:
+        - API Specifications
+      parameters:
+        - $ref: '#/components/parameters/SpecificationId'
+      responses:
+        '200':
+          description: API specification details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSpecification'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Specification not found.
+    put:
+      operationId: updateApiSpecification
+      summary: Update an API specification
+      description: Updates an existing OpenAPI specification.
+      tags:
+        - API Specifications
+      parameters:
+        - $ref: '#/components/parameters/SpecificationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiSpecificationUpdate'
+      responses:
+        '200':
+          description: Specification updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSpecification'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Specification not found.
+    delete:
+      operationId: deleteApiSpecification
+      summary: Delete an API specification
+      description: Deletes an OpenAPI specification from the API Builder.
+      tags:
+        - API Specifications
+      parameters:
+        - $ref: '#/components/parameters/SpecificationId'
+      responses:
+        '204':
+          description: Specification deleted.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Specification not found.
+  /deployments/{deploymentId}/logs:
+    get:
+      operationId: getDeploymentLogs
+      summary: Get deployment logs
+      description: >-
+        Retrieves build and execution logs for a deployment.
+      tags:
+        - Monitoring
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+        - name: type
+          in: query
+          description: Type of logs to retrieve.
+          schema:
+            type: string
+            enum:
+              - build
+              - execution
+            default: execution
+        - name: since
+          in: query
+          description: Retrieve logs since this timestamp.
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          description: Maximum number of log lines.
+          schema:
+            type: integer
+            default: 500
+      responses:
+        '200':
+          description: Deployment logs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deploymentId:
+                    type: string
+                  logType:
+                    type: string
+                  lines:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                          format: date-time
+                        message:
+                          type: string
+                        level:
+                          type: string
+                          enum:
+                            - info
+                            - warn
+                            - error
+                            - debug
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Deployment not found.
+  /deployments/{deploymentId}/metrics:
+    get:
+      operationId: getDeploymentMetrics
+      summary: Get deployment metrics
+      description: >-
+        Retrieves performance metrics for a running deployment including
+        message throughput and data visualization data.
+      tags:
+        - Monitoring
+      parameters:
+        - $ref: '#/components/parameters/DeploymentId'
+        - name: from
+          in: query
+          description: Start of the metrics time range.
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: End of the metrics time range.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Deployment metrics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentMetrics'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Deployment not found.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        JWT token obtained via the Jetic platform authentication.
+  parameters:
+    IntegrationId:
+      name: integrationId
+      in: path
+      required: true
+      description: Unique identifier of the integration.
+      schema:
+        type: string
+    DeploymentId:
+      name: deploymentId
+      in: path
+      required: true
+      description: Unique identifier of the deployment.
+      schema:
+        type: string
+    ClusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: Unique identifier of the cluster.
+      schema:
+        type: string
+    SpecificationId:
+      name: specificationId
+      in: path
+      required: true
+      description: Unique identifier of the API specification.
+      schema:
+        type: string
+  schemas:
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier.
+        name:
+          type: string
+          description: Name of the integration.
+        description:
+          type: string
+          description: Description of the integration.
+        status:
+          type: string
+          enum:
+            - draft
+            - deployed
+            - stopped
+            - error
+          description: Current status.
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+          description: Camel routes in this integration.
+        gitRepository:
+          type: string
+          description: Connected Git repository URL.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    IntegrationCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the integration.
+        description:
+          type: string
+          description: Description of the integration.
+        gitRepository:
+          type: string
+          description: Git repository URL to connect.
+    IntegrationUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        gitRepository:
+          type: string
+    Route:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique route identifier.
+        name:
+          type: string
+          description: Name of the route.
+        from:
+          type: string
+          description: Source Camel component URI.
+        to:
+          type: array
+          items:
+            type: string
+          description: Destination Camel component URIs.
+        processors:
+          type: array
+          items:
+            type: string
+          description: Enterprise integration pattern processors applied.
+    Deployment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique deployment identifier.
+        integrationId:
+          type: string
+          description: Associated integration identifier.
+        integrationName:
+          type: string
+          description: Name of the deployed integration.
+        clusterId:
+          type: string
+          description: Target cluster identifier.
+        clusterName:
+          type: string
+          description: Name of the target cluster.
+        status:
+          type: string
+          enum:
+            - running
+            - building
+            - stopped
+            - error
+          description: Current deployment status.
+        environment:
+          type: string
+          enum:
+            - development
+            - staging
+            - production
+        version:
+          type: string
+          description: Deployed version.
+        deployedAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Cluster:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique cluster identifier.
+        name:
+          type: string
+          description: Name of the cluster.
+        provider:
+          type: string
+          description: Cloud provider or infrastructure.
+        region:
+          type: string
+          description: Cluster region.
+        camelBridgeStatus:
+          type: string
+          enum:
+            - connected
+            - disconnected
+            - error
+          description: Status of the Camel Bridge operator.
+        kubernetesVersion:
+          type: string
+          description: Kubernetes version running on the cluster.
+        deploymentCount:
+          type: integer
+          description: Number of active deployments.
+        createdAt:
+          type: string
+          format: date-time
+    ClusterCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name for the cluster.
+        provider:
+          type: string
+          description: Cloud provider or infrastructure type.
+        region:
+          type: string
+          description: Cluster region.
+    ClusterStatus:
+      type: object
+      properties:
+        clusterId:
+          type: string
+        camelBridgeStatus:
+          type: string
+          enum:
+            - connected
+            - disconnected
+            - error
+        camelBridgeVersion:
+          type: string
+        camelKVersion:
+          type: string
+        activeDeployments:
+          type: integer
+        nodeCount:
+          type: integer
+        lastHeartbeat:
+          type: string
+          format: date-time
+    ApiSpecification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique specification identifier.
+        name:
+          type: string
+          description: Name of the API specification.
+        description:
+          type: string
+          description: Description of the API.
+        version:
+          type: string
+          description: API version string.
+        openApiVersion:
+          type: string
+          description: OpenAPI specification version.
+          enum:
+            - '3.0'
+            - '3.1'
+        paths:
+          type: integer
+          description: Number of paths defined.
+        integrationId:
+          type: string
+          description: Associated integration identifier.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ApiSpecificationCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the API specification.
+        description:
+          type: string
+          description: Description of the API.
+        version:
+          type: string
+          description: API version string.
+          default: 1.0.0
+        importUrl:
+          type: string
+          description: URL to import an existing OpenAPI specification.
+        importContent:
+          type: string
+          description: Raw OpenAPI specification content to import (YAML or JSON).
+    ApiSpecificationUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        content:
+          type: string
+          description: Updated OpenAPI specification content.
+    DeploymentMetrics:
+      type: object
+      properties:
+        deploymentId:
+          type: string
+        messagesProcessed:
+          type: integer
+          description: Total messages processed in the time range.
+        messagesPerSecond:
+          type: number
+          description: Average message throughput.
+        errorCount:
+          type: integer
+          description: Number of errors in the time range.
+        averageLatencyMs:
+          type: number
+          description: Average processing latency in milliseconds.
+        cpuUsage:
+          type: number
+          description: CPU usage percentage.
+        memoryUsageMb:
+          type: number
+          description: Memory usage in megabytes.
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
