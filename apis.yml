@@ -107,7 +107,7 @@ common:
     name: Features
     type: Features
 created: '2025-06-10T00:00:00.000Z'
-modified: '2026-03-14'
+modified: '2026-03-16'
 position: Consumer
 description: >-
   Jetic is the first and only cloud-native API & Integration Platform based on
@@ -115,5 +115,5 @@ description: >-
   regaining command of your development - without any drawbacks. 
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
