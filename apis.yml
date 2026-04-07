@@ -5,11 +5,11 @@ apis:
   - aid: jetic:platform-api
     name: Jetic Platform API
     tags:
+      - Apache Camel
+      - Deployments
       - Integrations
       - iPaaS
-      - Apache Camel
       - Kubernetes
-      - Deployments
     humanURL: https://docs.jetic.io/docs
     properties:
       - url: https://docs.jetic.io/docs
@@ -35,9 +35,9 @@ apis:
       users to design, build, deploy, and monitor integrations and REST APIs.
 name: Jetic
 tags:
+  - Apache Camel
   - Integrations
   - iPaaS
-  - Apache Camel
   - Pro-Code API Composition
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg

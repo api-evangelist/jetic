@@ -23,14 +23,14 @@ externalDocs:
 security:
   - bearerAuth: []
 tags:
-  - name: Integrations
-    description: Manage integration projects and routes
-  - name: Deployments
-    description: Deploy and manage integration deployments on Kubernetes
-  - name: Clusters
-    description: Manage connected Kubernetes clusters
   - name: API Specifications
     description: Manage OpenAPI specifications via the API Builder
+  - name: Clusters
+    description: Manage connected Kubernetes clusters
+  - name: Deployments
+    description: Deploy and manage integration deployments on Kubernetes
+  - name: Integrations
+    description: Manage integration projects and routes
   - name: Monitoring
     description: Monitor integration status, logs, and metrics
 paths:
