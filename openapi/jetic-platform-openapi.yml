@@ -37,7 +37,7 @@ paths:
   /integrations:
     get:
       operationId: listIntegrations
-      summary: List integrations
+      summary: Jetic List integrations
       description: >-
         Retrieves a list of all integration projects in the current
         workspace.
@@ -84,7 +84,7 @@ paths:
           description: Unauthorized.
     post:
       operationId: createIntegration
-      summary: Create an integration
+      summary: Jetic Create an integration
       description: >-
         Creates a new integration project with Camel routes and
         configurations.
@@ -110,7 +110,7 @@ paths:
   /integrations/{integrationId}:
     get:
       operationId: getIntegration
-      summary: Get an integration
+      summary: Jetic Get an integration
       description: Retrieves details for a specific integration project.
       tags:
         - Integrations
@@ -129,7 +129,7 @@ paths:
           description: Integration not found.
     put:
       operationId: updateIntegration
-      summary: Update an integration
+      summary: Jetic Update an integration
       description: Updates an existing integration project.
       tags:
         - Integrations
@@ -156,7 +156,7 @@ paths:
           description: Integration not found.
     delete:
       operationId: deleteIntegration
-      summary: Delete an integration
+      summary: Jetic Delete an integration
       description: Deletes an integration project and its associated resources.
       tags:
         - Integrations
@@ -172,7 +172,7 @@ paths:
   /integrations/{integrationId}/routes:
     get:
       operationId: listIntegrationRoutes
-      summary: List routes for an integration
+      summary: Jetic List routes for an integration
       description: >-
         Retrieves all Camel routes defined within an integration project.
       tags:
@@ -198,7 +198,7 @@ paths:
   /deployments:
     get:
       operationId: listDeployments
-      summary: List deployments
+      summary: Jetic List deployments
       description: >-
         Retrieves a list of all integration deployments across connected
         clusters.
@@ -249,7 +249,7 @@ paths:
   /deployments/{deploymentId}:
     get:
       operationId: getDeployment
-      summary: Get a deployment
+      summary: Jetic Get a deployment
       description: Retrieves details and status for a specific deployment.
       tags:
         - Deployments
@@ -268,7 +268,7 @@ paths:
           description: Deployment not found.
     delete:
       operationId: deleteDeployment
-      summary: Undeploy a deployment
+      summary: Jetic Undeploy a deployment
       description: >-
         Removes a deployed integration from the Kubernetes cluster.
       tags:
@@ -285,7 +285,7 @@ paths:
   /integrations/{integrationId}/deploy:
     post:
       operationId: deployIntegration
-      summary: Deploy an integration
+      summary: Jetic Deploy an integration
       description: >-
         Deploys an integration to a connected Kubernetes cluster. The
         integration is bundled, converted to Camel DSL, and sent to the
@@ -329,7 +329,7 @@ paths:
   /clusters:
     get:
       operationId: listClusters
-      summary: List clusters
+      summary: Jetic List clusters
       description: >-
         Retrieves a list of all connected Kubernetes clusters with their
         Camel Bridge status.
@@ -351,7 +351,7 @@ paths:
           description: Unauthorized.
     post:
       operationId: registerCluster
-      summary: Register a cluster
+      summary: Jetic Register a cluster
       description: >-
         Registers a new Kubernetes cluster by installing the Camel Bridge
         operator.
@@ -377,7 +377,7 @@ paths:
   /clusters/{clusterId}:
     get:
       operationId: getCluster
-      summary: Get cluster details
+      summary: Jetic Get cluster details
       description: >-
         Retrieves details and status information for a connected Kubernetes
         cluster.
@@ -398,7 +398,7 @@ paths:
           description: Cluster not found.
     delete:
       operationId: removeCluster
-      summary: Remove a cluster
+      summary: Jetic Remove a cluster
       description: Disconnects and removes a Kubernetes cluster.
       tags:
         - Clusters
@@ -414,7 +414,7 @@ paths:
   /clusters/{clusterId}/status:
     get:
       operationId: getClusterStatus
-      summary: Get cluster status
+      summary: Jetic Get cluster status
       description: >-
         Retrieves the current health and status of the Camel Bridge on a
         connected cluster.
@@ -436,7 +436,7 @@ paths:
   /api-specifications:
     get:
       operationId: listApiSpecifications
-      summary: List API specifications
+      summary: Jetic List API specifications
       description: >-
         Retrieves all OpenAPI specifications managed in the API Builder.
       tags:
@@ -470,7 +470,7 @@ paths:
           description: Unauthorized.
     post:
       operationId: createApiSpecification
-      summary: Create or import an API specification
+      summary: Jetic Create or import an API specification
       description: >-
         Creates a new OpenAPI specification or imports an existing one into
         the API Builder.
@@ -496,7 +496,7 @@ paths:
   /api-specifications/{specificationId}:
     get:
       operationId: getApiSpecification
-      summary: Get an API specification
+      summary: Jetic Get an API specification
       description: Retrieves a specific OpenAPI specification.
       tags:
         - API Specifications
@@ -515,7 +515,7 @@ paths:
           description: Specification not found.
     put:
       operationId: updateApiSpecification
-      summary: Update an API specification
+      summary: Jetic Update an API specification
       description: Updates an existing OpenAPI specification.
       tags:
         - API Specifications
@@ -542,7 +542,7 @@ paths:
           description: Specification not found.
     delete:
       operationId: deleteApiSpecification
-      summary: Delete an API specification
+      summary: Jetic Delete an API specification
       description: Deletes an OpenAPI specification from the API Builder.
       tags:
         - API Specifications
@@ -558,7 +558,7 @@ paths:
   /deployments/{deploymentId}/logs:
     get:
       operationId: getDeploymentLogs
-      summary: Get deployment logs
+      summary: Jetic Get deployment logs
       description: >-
         Retrieves build and execution logs for a deployment.
       tags:
@@ -622,7 +622,7 @@ paths:
   /deployments/{deploymentId}/metrics:
     get:
       operationId: getDeploymentMetrics
-      summary: Get deployment metrics
+      summary: Jetic Get deployment metrics
       description: >-
         Retrieves performance metrics for a running deployment including
         message throughput and data visualization data.
