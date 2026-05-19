@@ -1,0 +1,250 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Jetic Platform API — Integrations
+  description: 'Jetic Platform API — Integrations. 6 operations. Lead operation: Jetic List integrations. Self-contained Naftiko
+    capability covering one Jetic business surface.'
+  tags:
+  - Jetic
+  - Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    JETIC_API_KEY: JETIC_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-integrations
+    baseUri: https://app.us1.jetic.io/api/v1
+    description: Jetic Platform API — Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: integrations
+      path: /integrations
+      operations:
+      - name: listintegrations
+        method: GET
+        description: Jetic List integrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination.
+        - name: limit
+          in: query
+          type: integer
+          description: Number of results per page.
+        - name: status
+          in: query
+          type: string
+          description: Filter by integration status.
+      - name: createintegration
+        method: POST
+        description: Jetic Create an integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: integrations-integrationId
+      path: /integrations/{integrationId}
+      operations:
+      - name: getintegration
+        method: GET
+        description: Jetic Get an integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateintegration
+        method: PUT
+        description: Jetic Update an integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteintegration
+        method: DELETE
+        description: Jetic Delete an integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: integrations-integrationId-routes
+      path: /integrations/{integrationId}/routes
+      operations:
+      - name: listintegrationroutes
+        method: GET
+        description: Jetic List routes for an integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.JETIC_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: platform-integrations-rest
+    port: 8080
+    description: REST adapter for Jetic Platform API — Integrations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/integrations
+      name: integrations
+      description: REST surface for integrations.
+      operations:
+      - method: GET
+        name: listintegrations
+        description: Jetic List integrations
+        call: platform-integrations.listintegrations
+        with:
+          page: rest.page
+          limit: rest.limit
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createintegration
+        description: Jetic Create an integration
+        call: platform-integrations.createintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrations/{integrationid}
+      name: integrations-integrationid
+      description: REST surface for integrations-integrationId.
+      operations:
+      - method: GET
+        name: getintegration
+        description: Jetic Get an integration
+        call: platform-integrations.getintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateintegration
+        description: Jetic Update an integration
+        call: platform-integrations.updateintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteintegration
+        description: Jetic Delete an integration
+        call: platform-integrations.deleteintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrations/{integrationid}/routes
+      name: integrations-integrationid-routes
+      description: REST surface for integrations-integrationId-routes.
+      operations:
+      - method: GET
+        name: listintegrationroutes
+        description: Jetic List routes for an integration
+        call: platform-integrations.listintegrationroutes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Jetic Platform API — Integrations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: jetic-list-integrations
+      description: Jetic List integrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-integrations.listintegrations
+      with:
+        page: tools.page
+        limit: tools.limit
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jetic-create-integration
+      description: Jetic Create an integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-integrations.createintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jetic-get-integration
+      description: Jetic Get an integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-integrations.getintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jetic-update-integration
+      description: Jetic Update an integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: platform-integrations.updateintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jetic-delete-integration
+      description: Jetic Delete an integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: platform-integrations.deleteintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jetic-list-routes-integration
+      description: Jetic List routes for an integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-integrations.listintegrationroutes
+      outputParameters:
+      - type: object
+        mapping: $.
