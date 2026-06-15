@@ -1,0 +1,528 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jetic Platform API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic List integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/integrations",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by integration status."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all integration projects in the current workspace."
+        },
+        {
+          "info": {
+            "name": "Jetic Create an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.us1.jetic.io/api/v1/integrations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new integration project with Camel routes and configurations."
+        },
+        {
+          "info": {
+            "name": "Jetic Get an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/integrations/:integrationId",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the integration."
+              }
+            ]
+          },
+          "docs": "Retrieves details for a specific integration project."
+        },
+        {
+          "info": {
+            "name": "Jetic Update an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.us1.jetic.io/api/v1/integrations/:integrationId",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing integration project."
+        },
+        {
+          "info": {
+            "name": "Jetic Delete an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.us1.jetic.io/api/v1/integrations/:integrationId",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the integration."
+              }
+            ]
+          },
+          "docs": "Deletes an integration project and its associated resources."
+        },
+        {
+          "info": {
+            "name": "Jetic List routes for an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/integrations/:integrationId/routes",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the integration."
+              }
+            ]
+          },
+          "docs": "Retrieves all Camel routes defined within an integration project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic List deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query",
+                "description": "Filter deployments by cluster."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by deployment status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all integration deployments across connected clusters."
+        },
+        {
+          "info": {
+            "name": "Jetic Get a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              }
+            ]
+          },
+          "docs": "Retrieves details and status for a specific deployment."
+        },
+        {
+          "info": {
+            "name": "Jetic Undeploy a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              }
+            ]
+          },
+          "docs": "Removes a deployed integration from the Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Jetic Deploy an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.us1.jetic.io/api/v1/integrations/:integrationId/deploy",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploys an integration to a connected Kubernetes cluster. The integration is bundled, converted to Camel DSL, and sent to the Camel Bridge on the target cluster."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic List clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/clusters"
+          },
+          "docs": "Retrieves a list of all connected Kubernetes clusters with their Camel Bridge status."
+        },
+        {
+          "info": {
+            "name": "Jetic Register a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.us1.jetic.io/api/v1/clusters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new Kubernetes cluster by installing the Camel Bridge operator."
+        },
+        {
+          "info": {
+            "name": "Jetic Get cluster details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Retrieves details and status information for a connected Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Jetic Remove a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.us1.jetic.io/api/v1/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Disconnects and removes a Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Jetic Get cluster status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/clusters/:clusterId/status",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Retrieves the current health and status of the Camel Bridge on a connected cluster."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Specifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic List API specifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all OpenAPI specifications managed in the API Builder."
+        },
+        {
+          "info": {
+            "name": "Jetic Create or import an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new OpenAPI specification or imports an existing one into the API Builder."
+        },
+        {
+          "info": {
+            "name": "Jetic Get an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications/:specificationId",
+            "params": [
+              {
+                "name": "specificationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API specification."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific OpenAPI specification."
+        },
+        {
+          "info": {
+            "name": "Jetic Update an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications/:specificationId",
+            "params": [
+              {
+                "name": "specificationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API specification."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing OpenAPI specification."
+        },
+        {
+          "info": {
+            "name": "Jetic Delete an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications/:specificationId",
+            "params": [
+              {
+                "name": "specificationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API specification."
+              }
+            ]
+          },
+          "docs": "Deletes an OpenAPI specification from the API Builder."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic Get deployment logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId/logs",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of logs to retrieve."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve logs since this timestamp."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of log lines."
+              }
+            ]
+          },
+          "docs": "Retrieves build and execution logs for a deployment."
+        },
+        {
+          "info": {
+            "name": "Jetic Get deployment metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId/metrics",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start of the metrics time range."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End of the metrics time range."
+              }
+            ]
+          },
+          "docs": "Retrieves performance metrics for a running deployment including message throughput and data visualization data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
