@@ -63,7 +63,7 @@ common:
     type: Login
   - url: https://app.us1.jetic.io/registration
     name: Sign Up | jetic platform
-    type: SignUp
+    type: Signup
   - url: https://jetic.io/
     name: Jetic - Cloud-native Integration Platform
     type: Website
