@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: Jetic Platform API Specifications Clusters API
+  description: The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.
+  version: 1.0.0
+  contact:
+    name: Jetic
+    url: https://jetic.io/
+  license:
+    name: Proprietary
+    url: https://jetic.io/legal
+servers:
+- url: https://app.us1.jetic.io/api/v1
+  description: Jetic US1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Clusters
+  description: Manage connected Kubernetes clusters
+paths:
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: Jetic List clusters
+      description: Retrieves a list of all connected Kubernetes clusters with their Camel Bridge status.
+      tags:
+      - Clusters
+      responses:
+        '200':
+          description: A list of connected clusters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cluster'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: registerCluster
+      summary: Jetic Register a cluster
+      description: Registers a new Kubernetes cluster by installing the Camel Bridge operator.
+      tags:
+      - Clusters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterCreate'
+      responses:
+        '201':
+          description: Cluster registered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+  /clusters/{clusterId}:
+    get:
+      operationId: getCluster
+      summary: Jetic Get cluster details
+      description: Retrieves details and status information for a connected Kubernetes cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '200':
+          description: Cluster details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Cluster not found.
+    delete:
+      operationId: removeCluster
+      summary: Jetic Remove a cluster
+      description: Disconnects and removes a Kubernetes cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '204':
+          description: Cluster removed successfully.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Cluster not found.
+  /clusters/{clusterId}/status:
+    get:
+      operationId: getClusterStatus
+      summary: Jetic Get cluster status
+      description: Retrieves the current health and status of the Camel Bridge on a connected cluster.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/ClusterId'
+      responses:
+        '200':
+          description: Cluster status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterStatus'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Cluster not found.
+components:
+  schemas:
+    ClusterCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name for the cluster.
+        provider:
+          type: string
+          description: Cloud provider or infrastructure type.
+        region:
+          type: string
+          description: Cluster region.
+    Cluster:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique cluster identifier.
+        name:
+          type: string
+          description: Name of the cluster.
+        provider:
+          type: string
+          description: Cloud provider or infrastructure.
+        region:
+          type: string
+          description: Cluster region.
+        camelBridgeStatus:
+          type: string
+          enum:
+          - connected
+          - disconnected
+          - error
+          description: Status of the Camel Bridge operator.
+        kubernetesVersion:
+          type: string
+          description: Kubernetes version running on the cluster.
+        deploymentCount:
+          type: integer
+          description: Number of active deployments.
+        createdAt:
+          type: string
+          format: date-time
+    ClusterStatus:
+      type: object
+      properties:
+        clusterId:
+          type: string
+        camelBridgeStatus:
+          type: string
+          enum:
+          - connected
+          - disconnected
+          - error
+        camelBridgeVersion:
+          type: string
+        camelKVersion:
+          type: string
+        activeDeployments:
+          type: integer
+        nodeCount:
+          type: integer
+        lastHeartbeat:
+          type: string
+          format: date-time
+  parameters:
+    ClusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: Unique identifier of the cluster.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained via the Jetic platform authentication.
+externalDocs:
+  description: Jetic Platform Documentation
+  url: https://docs.jetic.io/docs

@@ -1,0 +1,285 @@
+openapi: 3.1.0
+info:
+  title: Jetic Platform API Specifications Integrations API
+  description: The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.
+  version: 1.0.0
+  contact:
+    name: Jetic
+    url: https://jetic.io/
+  license:
+    name: Proprietary
+    url: https://jetic.io/legal
+servers:
+- url: https://app.us1.jetic.io/api/v1
+  description: Jetic US1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Integrations
+  description: Manage integration projects and routes
+paths:
+  /integrations:
+    get:
+      operationId: listIntegrations
+      summary: Jetic List integrations
+      description: Retrieves a list of all integration projects in the current workspace.
+      tags:
+      - Integrations
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          default: 1
+      - name: limit
+        in: query
+        description: Number of results per page.
+        schema:
+          type: integer
+          default: 20
+      - name: status
+        in: query
+        description: Filter by integration status.
+        schema:
+          type: string
+          enum:
+          - draft
+          - deployed
+          - stopped
+          - error
+      responses:
+        '200':
+          description: A list of integrations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Integration'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          description: Unauthorized.
+    post:
+      operationId: createIntegration
+      summary: Jetic Create an integration
+      description: Creates a new integration project with Camel routes and configurations.
+      tags:
+      - Integrations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationCreate'
+      responses:
+        '201':
+          description: Integration created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+  /integrations/{integrationId}:
+    get:
+      operationId: getIntegration
+      summary: Jetic Get an integration
+      description: Retrieves details for a specific integration project.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '200':
+          description: Integration details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+    put:
+      operationId: updateIntegration
+      summary: Jetic Update an integration
+      description: Updates an existing integration project.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/IntegrationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationUpdate'
+      responses:
+        '200':
+          description: Integration updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+    delete:
+      operationId: deleteIntegration
+      summary: Jetic Delete an integration
+      description: Deletes an integration project and its associated resources.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '204':
+          description: Integration deleted successfully.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+  /integrations/{integrationId}/routes:
+    get:
+      operationId: listIntegrationRoutes
+      summary: Jetic List routes for an integration
+      description: Retrieves all Camel routes defined within an integration project.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/IntegrationId'
+      responses:
+        '200':
+          description: A list of routes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Route'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Integration not found.
+components:
+  parameters:
+    IntegrationId:
+      name: integrationId
+      in: path
+      required: true
+      description: Unique identifier of the integration.
+      schema:
+        type: string
+  schemas:
+    IntegrationUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        gitRepository:
+          type: string
+    Route:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique route identifier.
+        name:
+          type: string
+          description: Name of the route.
+        from:
+          type: string
+          description: Source Camel component URI.
+        to:
+          type: array
+          items:
+            type: string
+          description: Destination Camel component URIs.
+        processors:
+          type: array
+          items:
+            type: string
+          description: Enterprise integration pattern processors applied.
+    IntegrationCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the integration.
+        description:
+          type: string
+          description: Description of the integration.
+        gitRepository:
+          type: string
+          description: Git repository URL to connect.
+    Integration:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier.
+        name:
+          type: string
+          description: Name of the integration.
+        description:
+          type: string
+          description: Description of the integration.
+        status:
+          type: string
+          enum:
+          - draft
+          - deployed
+          - stopped
+          - error
+          description: Current status.
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+          description: Camel routes in this integration.
+        gitRepository:
+          type: string
+          description: Connected Git repository URL.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained via the Jetic platform authentication.
+externalDocs:
+  description: Jetic Platform Documentation
+  url: https://docs.jetic.io/docs

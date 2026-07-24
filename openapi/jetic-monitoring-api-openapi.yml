@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Jetic Platform API Specifications Monitoring API
+  description: The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.
+  version: 1.0.0
+  contact:
+    name: Jetic
+    url: https://jetic.io/
+  license:
+    name: Proprietary
+    url: https://jetic.io/legal
+servers:
+- url: https://app.us1.jetic.io/api/v1
+  description: Jetic US1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Monitoring
+  description: Monitor integration status, logs, and metrics
+paths:
+  /deployments/{deploymentId}/logs:
+    get:
+      operationId: getDeploymentLogs
+      summary: Jetic Get deployment logs
+      description: Retrieves build and execution logs for a deployment.
+      tags:
+      - Monitoring
+      parameters:
+      - $ref: '#/components/parameters/DeploymentId'
+      - name: type
+        in: query
+        description: Type of logs to retrieve.
+        schema:
+          type: string
+          enum:
+          - build
+          - execution
+          default: execution
+      - name: since
+        in: query
+        description: Retrieve logs since this timestamp.
+        schema:
+          type: string
+          format: date-time
+      - name: limit
+        in: query
+        description: Maximum number of log lines.
+        schema:
+          type: integer
+          default: 500
+      responses:
+        '200':
+          description: Deployment logs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deploymentId:
+                    type: string
+                  logType:
+                    type: string
+                  lines:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                          format: date-time
+                        message:
+                          type: string
+                        level:
+                          type: string
+                          enum:
+                          - info
+                          - warn
+                          - error
+                          - debug
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Deployment not found.
+  /deployments/{deploymentId}/metrics:
+    get:
+      operationId: getDeploymentMetrics
+      summary: Jetic Get deployment metrics
+      description: Retrieves performance metrics for a running deployment including message throughput and data visualization data.
+      tags:
+      - Monitoring
+      parameters:
+      - $ref: '#/components/parameters/DeploymentId'
+      - name: from
+        in: query
+        description: Start of the metrics time range.
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        description: End of the metrics time range.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Deployment metrics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentMetrics'
+        '401':
+          description: Unauthorized.
+        '404':
+          description: Deployment not found.
+components:
+  schemas:
+    DeploymentMetrics:
+      type: object
+      properties:
+        deploymentId:
+          type: string
+        messagesProcessed:
+          type: integer
+          description: Total messages processed in the time range.
+        messagesPerSecond:
+          type: number
+          description: Average message throughput.
+        errorCount:
+          type: integer
+          description: Number of errors in the time range.
+        averageLatencyMs:
+          type: number
+          description: Average processing latency in milliseconds.
+        cpuUsage:
+          type: number
+          description: CPU usage percentage.
+        memoryUsageMb:
+          type: number
+          description: Memory usage in megabytes.
+  parameters:
+    DeploymentId:
+      name: deploymentId
+      in: path
+      required: true
+      description: Unique identifier of the deployment.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained via the Jetic platform authentication.
+externalDocs:
+  description: Jetic Platform Documentation
+  url: https://docs.jetic.io/docs
