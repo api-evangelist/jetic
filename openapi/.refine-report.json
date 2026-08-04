@@ -1,0 +1,22 @@
+{
+  "provider": "jetic",
+  "sources": [
+    "jetic-api-specifications-api-openapi.yml",
+    "jetic-clusters-api-openapi.yml",
+    "jetic-deployments-api-openapi.yml",
+    "jetic-integrations-api-openapi.yml",
+    "jetic-monitoring-api-openapi.yml"
+  ],
+  "outputs": [
+    "jetic-api-specifications-api-openapi.yml",
+    "jetic-clusters-api-openapi.yml",
+    "jetic-deployments-api-openapi.yml",
+    "jetic-integrations-api-openapi.yml",
+    "jetic-monitoring-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
