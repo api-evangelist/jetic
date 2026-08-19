@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jetic Platform API Specifications Deployments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic List deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "query",
+                "description": "Filter deployments by cluster."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by deployment status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all integration deployments across connected clusters."
+        },
+        {
+          "info": {
+            "name": "Jetic Get a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              }
+            ]
+          },
+          "docs": "Retrieves details and status for a specific deployment."
+        },
+        {
+          "info": {
+            "name": "Jetic Undeploy a deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              }
+            ]
+          },
+          "docs": "Removes a deployed integration from the Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Jetic Deploy an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.us1.jetic.io/api/v1/integrations/:integrationId/deploy",
+            "params": [
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploys an integration to a connected Kubernetes cluster. The integration is bundled, converted to Camel DSL, and sent to the Camel Bridge on the target cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

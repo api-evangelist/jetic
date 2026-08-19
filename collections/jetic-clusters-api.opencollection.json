@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jetic Platform API Specifications Clusters API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic List clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/clusters"
+          },
+          "docs": "Retrieves a list of all connected Kubernetes clusters with their Camel Bridge status."
+        },
+        {
+          "info": {
+            "name": "Jetic Register a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.us1.jetic.io/api/v1/clusters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new Kubernetes cluster by installing the Camel Bridge operator."
+        },
+        {
+          "info": {
+            "name": "Jetic Get cluster details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Retrieves details and status information for a connected Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Jetic Remove a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.us1.jetic.io/api/v1/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Disconnects and removes a Kubernetes cluster."
+        },
+        {
+          "info": {
+            "name": "Jetic Get cluster status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/clusters/:clusterId/status",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the cluster."
+              }
+            ]
+          },
+          "docs": "Retrieves the current health and status of the Camel Bridge on a connected cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

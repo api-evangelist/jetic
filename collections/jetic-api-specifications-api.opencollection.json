@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jetic Platform API Specifications API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Specifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic List API specifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all OpenAPI specifications managed in the API Builder."
+        },
+        {
+          "info": {
+            "name": "Jetic Create or import an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new OpenAPI specification or imports an existing one into the API Builder."
+        },
+        {
+          "info": {
+            "name": "Jetic Get an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications/:specificationId",
+            "params": [
+              {
+                "name": "specificationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API specification."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific OpenAPI specification."
+        },
+        {
+          "info": {
+            "name": "Jetic Update an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications/:specificationId",
+            "params": [
+              {
+                "name": "specificationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API specification."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing OpenAPI specification."
+        },
+        {
+          "info": {
+            "name": "Jetic Delete an API specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.us1.jetic.io/api/v1/api-specifications/:specificationId",
+            "params": [
+              {
+                "name": "specificationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the API specification."
+              }
+            ]
+          },
+          "docs": "Deletes an OpenAPI specification from the API Builder."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

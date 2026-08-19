@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jetic Platform API Specifications Monitoring API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Jetic Get deployment logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId/logs",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of logs to retrieve."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve logs since this timestamp."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of log lines."
+              }
+            ]
+          },
+          "docs": "Retrieves build and execution logs for a deployment."
+        },
+        {
+          "info": {
+            "name": "Jetic Get deployment metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.us1.jetic.io/api/v1/deployments/:deploymentId/metrics",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the deployment."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start of the metrics time range."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End of the metrics time range."
+              }
+            ]
+          },
+          "docs": "Retrieves performance metrics for a running deployment including message throughput and data visualization data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
