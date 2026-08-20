@@ -6,6 +6,8 @@ apis:
   description: Manage OpenAPI specifications via the API Builder
   humanURL: https://docs.jetic.io/docs
   tags:
+  - API Specification
+  tags_raw:
   - API Specifications
   properties:
   - type: OpenAPI
@@ -29,6 +31,8 @@ apis:
   description: Manage connected Kubernetes clusters
   humanURL: https://docs.jetic.io/docs
   tags:
+  - Cluster
+  tags_raw:
   - Clusters
   properties:
   - type: OpenAPI
@@ -52,6 +56,8 @@ apis:
   description: Deploy and manage integration deployments on Kubernetes
   humanURL: https://docs.jetic.io/docs
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
@@ -75,6 +81,8 @@ apis:
   description: Manage integration projects and routes
   humanURL: https://docs.jetic.io/docs
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -118,6 +126,11 @@ apis:
     url: json-ld/jetic-context.jsonld
 name: Jetic
 tags:
+  - Apache Camel
+  - Integration
+  - iPaaS
+  - Pro-Code-API-Composition
+tags_raw:
   - Apache Camel
   - Integrations
   - iPaaS
