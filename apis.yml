@@ -6,7 +6,7 @@ apis:
   description: Manage OpenAPI specifications via the API Builder
   humanURL: https://docs.jetic.io/docs
   tags:
-  - API Specification
+  - API Specifications
   tags_raw:
   - API Specifications
   properties:
@@ -129,7 +129,7 @@ tags:
   - Apache Camel
   - Integration
   - iPaaS
-  - Pro-Code-API-Composition
+  - Pro-Code API Composition
 tags_raw:
   - Apache Camel
   - Integrations
