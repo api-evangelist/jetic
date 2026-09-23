@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Jetic Platform API Specifications API
   description: The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.
@@ -184,6 +184,17 @@ components:
         content:
           type: string
           description: Updated OpenAPI specification content.
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
     ApiSpecificationCreate:
       type: object
       required:
@@ -205,17 +216,6 @@ components:
         importContent:
           type: string
           description: Raw OpenAPI specification content to import (YAML or JSON).
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
-        totalPages:
-          type: integer
   parameters:
     SpecificationId:
       name: specificationId

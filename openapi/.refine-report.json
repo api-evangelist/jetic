@@ -1,11 +1,7 @@
 {
   "provider": "jetic",
   "sources": [
-    "jetic-api-specifications-api-openapi.yml",
-    "jetic-clusters-api-openapi.yml",
-    "jetic-deployments-api-openapi.yml",
-    "jetic-integrations-api-openapi.yml",
-    "jetic-monitoring-api-openapi.yml"
+    "_original/jetic-platform-openapi.yml"
   ],
   "outputs": [
     "jetic-api-specifications-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "jetic-platform-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "jetic-api-specifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jetic-clusters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jetic-deployments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jetic-integrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jetic-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

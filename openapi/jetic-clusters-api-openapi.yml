@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Jetic Platform API Specifications Clusters API
+  title: Jetic Platform Clusters API
   description: The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.
   version: 1.0.0
   contact:
@@ -119,20 +119,28 @@ paths:
           description: Cluster not found.
 components:
   schemas:
-    ClusterCreate:
+    ClusterStatus:
       type: object
-      required:
-      - name
       properties:
-        name:
+        clusterId:
           type: string
-          description: Name for the cluster.
-        provider:
+        camelBridgeStatus:
           type: string
-          description: Cloud provider or infrastructure type.
-        region:
+          enum:
+          - connected
+          - disconnected
+          - error
+        camelBridgeVersion:
           type: string
-          description: Cluster region.
+        camelKVersion:
+          type: string
+        activeDeployments:
+          type: integer
+        nodeCount:
+          type: integer
+        lastHeartbeat:
+          type: string
+          format: date-time
     Cluster:
       type: object
       properties:
@@ -164,28 +172,20 @@ components:
         createdAt:
           type: string
           format: date-time
-    ClusterStatus:
+    ClusterCreate:
       type: object
+      required:
+      - name
       properties:
-        clusterId:
+        name:
           type: string
-        camelBridgeStatus:
+          description: Name for the cluster.
+        provider:
           type: string
-          enum:
-          - connected
-          - disconnected
-          - error
-        camelBridgeVersion:
+          description: Cloud provider or infrastructure type.
+        region:
           type: string
-        camelKVersion:
-          type: string
-        activeDeployments:
-          type: integer
-        nodeCount:
-          type: integer
-        lastHeartbeat:
-          type: string
-          format: date-time
+          description: Cluster region.
   parameters:
     ClusterId:
       name: clusterId
