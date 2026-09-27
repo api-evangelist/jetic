@@ -175,15 +175,21 @@ paths:
         '404':
           description: Integration not found.
 components:
-  parameters:
-    IntegrationId:
-      name: integrationId
-      in: path
-      required: true
-      description: Unique identifier of the integration.
-      schema:
-        type: string
   schemas:
+    IntegrationCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the integration.
+        description:
+          type: string
+          description: Description of the integration.
+        gitRepository:
+          type: string
+          description: Git repository URL to connect.
     Pagination:
       type: object
       properties:
@@ -195,6 +201,37 @@ components:
           type: integer
         totalPages:
           type: integer
+    Route:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique route identifier.
+        name:
+          type: string
+          description: Name of the route.
+        from:
+          type: string
+          description: Source Camel component URI.
+        to:
+          type: array
+          items:
+            type: string
+          description: Destination Camel component URIs.
+        processors:
+          type: array
+          items:
+            type: string
+          description: Enterprise integration pattern processors applied.
+    IntegrationUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        gitRepository:
+          type: string
     Integration:
       type: object
       properties:
@@ -229,51 +266,14 @@ components:
         updatedAt:
           type: string
           format: date-time
-    IntegrationCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the integration.
-        description:
-          type: string
-          description: Description of the integration.
-        gitRepository:
-          type: string
-          description: Git repository URL to connect.
-    Route:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique route identifier.
-        name:
-          type: string
-          description: Name of the route.
-        from:
-          type: string
-          description: Source Camel component URI.
-        to:
-          type: array
-          items:
-            type: string
-          description: Destination Camel component URIs.
-        processors:
-          type: array
-          items:
-            type: string
-          description: Enterprise integration pattern processors applied.
-    IntegrationUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        gitRepository:
-          type: string
+  parameters:
+    IntegrationId:
+      name: integrationId
+      in: path
+      required: true
+      description: Unique identifier of the integration.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

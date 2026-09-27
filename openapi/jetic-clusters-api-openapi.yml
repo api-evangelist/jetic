@@ -141,6 +141,20 @@ components:
         lastHeartbeat:
           type: string
           format: date-time
+    ClusterCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name for the cluster.
+        provider:
+          type: string
+          description: Cloud provider or infrastructure type.
+        region:
+          type: string
+          description: Cluster region.
     Cluster:
       type: object
       properties:
@@ -172,20 +186,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    ClusterCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name for the cluster.
-        provider:
-          type: string
-          description: Cloud provider or infrastructure type.
-        region:
-          type: string
-          description: Cluster region.
   parameters:
     ClusterId:
       name: clusterId
