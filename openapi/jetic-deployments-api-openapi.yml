@@ -145,13 +145,6 @@ paths:
           description: Integration not found.
 components:
   parameters:
-    IntegrationId:
-      name: integrationId
-      in: path
-      required: true
-      description: Unique identifier of the integration.
-      schema:
-        type: string
     DeploymentId:
       name: deploymentId
       in: path
@@ -159,18 +152,14 @@ components:
       description: Unique identifier of the deployment.
       schema:
         type: string
+    IntegrationId:
+      name: integrationId
+      in: path
+      required: true
+      description: Unique identifier of the integration.
+      schema:
+        type: string
   schemas:
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
-        totalPages:
-          type: integer
     Deployment:
       type: object
       properties:
@@ -212,6 +201,17 @@ components:
         updatedAt:
           type: string
           format: date-time
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
   securitySchemes:
     bearerAuth:
       type: http

@@ -139,27 +139,6 @@ paths:
           description: Specification not found.
 components:
   schemas:
-    ApiSpecificationCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the API specification.
-        description:
-          type: string
-          description: Description of the API.
-        version:
-          type: string
-          description: API version string.
-          default: 1.0.0
-        importUrl:
-          type: string
-          description: URL to import an existing OpenAPI specification.
-        importContent:
-          type: string
-          description: Raw OpenAPI specification content to import (YAML or JSON).
     Pagination:
       type: object
       properties:
@@ -216,6 +195,27 @@ components:
         content:
           type: string
           description: Updated OpenAPI specification content.
+    ApiSpecificationCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the API specification.
+        description:
+          type: string
+          description: Description of the API.
+        version:
+          type: string
+          description: API version string.
+          default: 1.0.0
+        importUrl:
+          type: string
+          description: URL to import an existing OpenAPI specification.
+        importContent:
+          type: string
+          description: Raw OpenAPI specification content to import (YAML or JSON).
   parameters:
     SpecificationId:
       name: specificationId
