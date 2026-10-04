@@ -119,42 +119,6 @@ paths:
           description: Cluster not found.
 components:
   schemas:
-    ClusterCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name for the cluster.
-        provider:
-          type: string
-          description: Cloud provider or infrastructure type.
-        region:
-          type: string
-          description: Cluster region.
-    ClusterStatus:
-      type: object
-      properties:
-        clusterId:
-          type: string
-        camelBridgeStatus:
-          type: string
-          enum:
-          - connected
-          - disconnected
-          - error
-        camelBridgeVersion:
-          type: string
-        camelKVersion:
-          type: string
-        activeDeployments:
-          type: integer
-        nodeCount:
-          type: integer
-        lastHeartbeat:
-          type: string
-          format: date-time
     Cluster:
       type: object
       properties:
@@ -186,6 +150,42 @@ components:
         createdAt:
           type: string
           format: date-time
+    ClusterStatus:
+      type: object
+      properties:
+        clusterId:
+          type: string
+        camelBridgeStatus:
+          type: string
+          enum:
+          - connected
+          - disconnected
+          - error
+        camelBridgeVersion:
+          type: string
+        camelKVersion:
+          type: string
+        activeDeployments:
+          type: integer
+        nodeCount:
+          type: integer
+        lastHeartbeat:
+          type: string
+          format: date-time
+    ClusterCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name for the cluster.
+        provider:
+          type: string
+          description: Cloud provider or infrastructure type.
+        region:
+          type: string
+          description: Cluster region.
   parameters:
     ClusterId:
       name: clusterId

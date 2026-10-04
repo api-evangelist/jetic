@@ -114,14 +114,6 @@ paths:
         '404':
           description: Deployment not found.
 components:
-  parameters:
-    DeploymentId:
-      name: deploymentId
-      in: path
-      required: true
-      description: Unique identifier of the deployment.
-      schema:
-        type: string
   schemas:
     DeploymentMetrics:
       type: object
@@ -146,6 +138,14 @@ components:
         memoryUsageMb:
           type: number
           description: Memory usage in megabytes.
+  parameters:
+    DeploymentId:
+      name: deploymentId
+      in: path
+      required: true
+      description: Unique identifier of the deployment.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
