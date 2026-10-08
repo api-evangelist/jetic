@@ -168,6 +168,12 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/jetic.png
 access: 3rd-Party
 common:
+  - type: Plans
+    url: plans/jetic-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/jetic-rate-limits.yml
+  - type: FinOps
+    url: finops/jetic-finops.yml
   - type: CapabilityMap
     url: capabilities/jetic-capability-edges.yml
     name: Jetic Business Capability Map
