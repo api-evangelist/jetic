@@ -176,20 +176,40 @@ paths:
           description: Integration not found.
 components:
   schemas:
-    IntegrationCreate:
+    Integration:
       type: object
-      required:
-      - name
       properties:
+        id:
+          type: string
+          description: Unique identifier.
         name:
           type: string
           description: Name of the integration.
         description:
           type: string
           description: Description of the integration.
+        status:
+          type: string
+          enum:
+          - draft
+          - deployed
+          - stopped
+          - error
+          description: Current status.
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Route'
+          description: Camel routes in this integration.
         gitRepository:
           type: string
-          description: Git repository URL to connect.
+          description: Connected Git repository URL.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     Pagination:
       type: object
       properties:
@@ -232,40 +252,20 @@ components:
           type: string
         gitRepository:
           type: string
-    Integration:
+    IntegrationCreate:
       type: object
+      required:
+      - name
       properties:
-        id:
-          type: string
-          description: Unique identifier.
         name:
           type: string
           description: Name of the integration.
         description:
           type: string
           description: Description of the integration.
-        status:
-          type: string
-          enum:
-          - draft
-          - deployed
-          - stopped
-          - error
-          description: Current status.
-        routes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Route'
-          description: Camel routes in this integration.
         gitRepository:
           type: string
-          description: Connected Git repository URL.
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
+          description: Git repository URL to connect.
   parameters:
     IntegrationId:
       name: integrationId

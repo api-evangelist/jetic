@@ -138,28 +138,15 @@ paths:
         '404':
           description: Specification not found.
 components:
+  parameters:
+    SpecificationId:
+      name: specificationId
+      in: path
+      required: true
+      description: Unique identifier of the API specification.
+      schema:
+        type: string
   schemas:
-    ApiSpecificationCreate:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the API specification.
-        description:
-          type: string
-          description: Description of the API.
-        version:
-          type: string
-          description: API version string.
-          default: 1.0.0
-        importUrl:
-          type: string
-          description: URL to import an existing OpenAPI specification.
-        importContent:
-          type: string
-          description: Raw OpenAPI specification content to import (YAML or JSON).
     ApiSpecificationUpdate:
       type: object
       properties:
@@ -172,17 +159,6 @@ components:
         content:
           type: string
           description: Updated OpenAPI specification content.
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        limit:
-          type: integer
-        total:
-          type: integer
-        totalPages:
-          type: integer
     ApiSpecification:
       type: object
       properties:
@@ -216,14 +192,38 @@ components:
         updatedAt:
           type: string
           format: date-time
-  parameters:
-    SpecificationId:
-      name: specificationId
-      in: path
-      required: true
-      description: Unique identifier of the API specification.
-      schema:
-        type: string
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+    ApiSpecificationCreate:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the API specification.
+        description:
+          type: string
+          description: Description of the API.
+        version:
+          type: string
+          description: API version string.
+          default: 1.0.0
+        importUrl:
+          type: string
+          description: URL to import an existing OpenAPI specification.
+        importContent:
+          type: string
+          description: Raw OpenAPI specification content to import (YAML or JSON).
   securitySchemes:
     bearerAuth:
       type: http
