@@ -168,6 +168,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/jetic.png
 access: 3rd-Party
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/jetic/overview
   - type: Plans
     url: plans/jetic-plans-pricing.yml
   - type: RateLimits
