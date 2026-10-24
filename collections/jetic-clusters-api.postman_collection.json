@@ -1,149 +1,638 @@
 {
+  "info": {
+    "_postman_id": "cb00ef18-9034-4880-b34d-80f6a8de55fc",
+    "name": "Jetic Platform Clusters API",
+    "description": "The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.\n\nContact Support:\n Name: Jetic",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:31:56.000Z",
+    "updatedAt": "2026-10-22T01:31:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cb00ef18-9034-4880-b34d-80f6a8de55fc"
+  },
   "item": [
     {
-      "id": "13c1fa98-fd4a-4ded-9ab4-d7341c3419fe",
-      "name": "Clusters",
-      "description": {
-        "content": "Manage connected Kubernetes clusters",
-        "type": "text/plain"
-      },
+      "name": "clusters",
       "item": [
         {
-          "id": "5c5e876a-30ec-41c3-a30e-39d6729458da",
+          "name": "{clusterId}",
+          "item": [
+            {
+              "name": "status",
+              "item": [
+                {
+                  "name": "Jetic Get cluster status",
+                  "id": "8090899d-557f-40c4-8792-fe891c438988",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId",
+                        "status"
+                      ],
+                      "variable": [
+                        {
+                          "id": "93779d3c-b9ac-446b-819f-4dbebc653da8",
+                          "key": "clusterId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the cluster."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the current health and status of the Camel Bridge on a connected cluster."
+                  },
+                  "response": [
+                    {
+                      "id": "c4c9bdd4-6e43-485f-84b6-6eafc0a6753d",
+                      "name": "Cluster status.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"clusterId\": \"<string>\",\n  \"camelBridgeStatus\": \"error\",\n  \"camelBridgeVersion\": \"<string>\",\n  \"camelKVersion\": \"<string>\",\n  \"activeDeployments\": \"<integer>\",\n  \"nodeCount\": \"<integer>\",\n  \"lastHeartbeat\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T01:31:56.000Z",
+                      "updatedAt": "2026-10-22T01:31:56.000Z",
+                      "uid": "35240-c4c9bdd4-6e43-485f-84b6-6eafc0a6753d"
+                    },
+                    {
+                      "id": "ab95ad77-2714-4108-ab70-cea53d96d590",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:31:56.000Z",
+                      "updatedAt": "2026-10-22T01:31:56.000Z",
+                      "uid": "35240-ab95ad77-2714-4108-ab70-cea53d96d590"
+                    },
+                    {
+                      "id": "34fe83c8-f8a3-4939-9f56-eeccbb14d7f9",
+                      "name": "Cluster not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/status",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "status"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:31:56.000Z",
+                      "updatedAt": "2026-10-22T01:31:56.000Z",
+                      "uid": "35240-34fe83c8-f8a3-4939-9f56-eeccbb14d7f9"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:31:56.000Z",
+                  "updatedAt": "2026-10-22T01:31:56.000Z",
+                  "uid": "35240-8090899d-557f-40c4-8792-fe891c438988"
+                }
+              ],
+              "id": "356dc3a4-9ad5-46e5-b64b-6361bad24ecc",
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-356dc3a4-9ad5-46e5-b64b-6361bad24ecc"
+            },
+            {
+              "name": "Jetic Get cluster details",
+              "id": "b05a95c6-8ec2-4414-bf04-afcf43ddc42e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/clusters/:clusterId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters",
+                    ":clusterId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ae3428dc-56cc-4fd5-a769-b3e0d33c85a4",
+                      "key": "clusterId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "description": "Retrieves details and status information for a connected Kubernetes cluster."
+              },
+              "response": [
+                {
+                  "id": "7c008d2e-d23f-459a-9230-16bc3fc8bba3",
+                  "name": "Cluster details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"region\": \"<string>\",\n  \"camelBridgeStatus\": \"connected\",\n  \"kubernetesVersion\": \"<string>\",\n  \"deploymentCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T01:31:56.000Z",
+                  "updatedAt": "2026-10-22T01:31:56.000Z",
+                  "uid": "35240-7c008d2e-d23f-459a-9230-16bc3fc8bba3"
+                },
+                {
+                  "id": "a9caeba4-67f4-4479-9a23-111aef92782a",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:56.000Z",
+                  "updatedAt": "2026-10-22T01:31:56.000Z",
+                  "uid": "35240-a9caeba4-67f4-4479-9a23-111aef92782a"
+                },
+                {
+                  "id": "7018877a-a4d1-4c43-9d73-984cd0069650",
+                  "name": "Cluster not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:56.000Z",
+                  "updatedAt": "2026-10-22T01:31:56.000Z",
+                  "uid": "35240-7018877a-a4d1-4c43-9d73-984cd0069650"
+                }
+              ],
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-b05a95c6-8ec2-4414-bf04-afcf43ddc42e"
+            },
+            {
+              "name": "Jetic Remove a cluster",
+              "id": "68986cd5-adcf-4ab7-8a20-875641ffad2d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/clusters/:clusterId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters",
+                    ":clusterId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "132291fa-b200-4925-8ca0-b74e8b346556",
+                      "key": "clusterId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the cluster."
+                    }
+                  ]
+                },
+                "description": "Disconnects and removes a Kubernetes cluster."
+              },
+              "response": [
+                {
+                  "id": "654abe63-e1ec-43da-8927-b25495fd4d0a",
+                  "name": "Cluster removed successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:56.000Z",
+                  "updatedAt": "2026-10-22T01:31:56.000Z",
+                  "uid": "35240-654abe63-e1ec-43da-8927-b25495fd4d0a"
+                },
+                {
+                  "id": "2d3988f6-23d6-48dd-8213-a71ba919abe9",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:56.000Z",
+                  "updatedAt": "2026-10-22T01:31:56.000Z",
+                  "uid": "35240-2d3988f6-23d6-48dd-8213-a71ba919abe9"
+                },
+                {
+                  "id": "c0cc56db-3ee2-429f-8a1e-efeaf37218ef",
+                  "name": "Cluster not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:56.000Z",
+                  "updatedAt": "2026-10-22T01:31:56.000Z",
+                  "uid": "35240-c0cc56db-3ee2-429f-8a1e-efeaf37218ef"
+                }
+              ],
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-68986cd5-adcf-4ab7-8a20-875641ffad2d"
+            }
+          ],
+          "id": "56c04cae-049c-4ecf-a927-6affc93a4dce",
+          "createdAt": "2026-10-22T01:31:56.000Z",
+          "updatedAt": "2026-10-22T01:31:56.000Z",
+          "uid": "35240-56c04cae-049c-4ecf-a927-6affc93a4dce"
+        },
+        {
           "name": "Jetic List clusters",
+          "id": "9e019ce3-61bc-4346-bfa4-fd361ba15729",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Jetic List clusters",
-            "description": {
-              "content": "Retrieves a list of all connected Kubernetes clusters with their Camel Bridge status.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "clusters"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/clusters",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clusters"
+              ]
+            },
+            "description": "Retrieves a list of all connected Kubernetes clusters with their Camel Bridge status."
           },
           "response": [
             {
-              "id": "5ab7c6ba-1451-4ae5-aa29-52c047b7b56a",
+              "id": "cdc7683a-5a73-4ff8-ab94-0ff30b07c446",
               "name": "A list of connected clusters.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"provider\": \"string\",\n      \"region\": \"string\",\n      \"camelBridgeStatus\": \"connected\",\n      \"kubernetesVersion\": \"string\",\n      \"deploymentCount\": 563,\n      \"createdAt\": \"1947-08-13T10:08:32.782Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"provider\": \"string\",\n      \"region\": \"string\",\n      \"camelBridgeStatus\": \"connected\",\n      \"kubernetesVersion\": \"string\",\n      \"deploymentCount\": 7675,\n      \"createdAt\": \"1965-04-24T04:00:36.140Z\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"region\": \"<string>\",\n      \"camelBridgeStatus\": \"connected\",\n      \"kubernetesVersion\": \"<string>\",\n      \"deploymentCount\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"region\": \"<string>\",\n      \"camelBridgeStatus\": \"connected\",\n      \"kubernetesVersion\": \"<string>\",\n      \"deploymentCount\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-cdc7683a-5a73-4ff8-ab94-0ff30b07c446"
             },
             {
-              "id": "64895717-1d82-4f50-acfb-4efcdb5509c3",
+              "id": "12a795f5-a4c1-4f38-9ccf-fa4f26347983",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-12a795f5-a4c1-4f38-9ccf-fa4f26347983"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:31:56.000Z",
+          "updatedAt": "2026-10-22T01:31:56.000Z",
+          "uid": "35240-9e019ce3-61bc-4346-bfa4-fd361ba15729"
         },
         {
-          "id": "68033610-2ac6-4adc-99df-713d85c5c0d5",
           "name": "Jetic Register a cluster",
+          "id": "4d3d76d4-c14a-44c8-b987-d1f23aad1691",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Jetic Register a cluster",
-            "description": {
-              "content": "Registers a new Kubernetes cluster by installing the Camel Bridge operator.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "clusters"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -154,750 +643,188 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"region\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/clusters",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clusters"
+              ]
+            },
+            "description": "Registers a new Kubernetes cluster by installing the Camel Bridge operator."
           },
           "response": [
             {
-              "id": "db00284a-7945-489d-b82f-a1ba48dfb2d2",
+              "id": "2ac8b4ec-478f-48b8-a887-04265173051c",
               "name": "Cluster registered successfully.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"region\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"provider\": \"string\",\n  \"region\": \"string\",\n  \"camelBridgeStatus\": \"disconnected\",\n  \"kubernetesVersion\": \"string\",\n  \"deploymentCount\": 6441,\n  \"createdAt\": \"2006-04-08T07:24:48.877Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"region\": \"<string>\",\n  \"camelBridgeStatus\": \"connected\",\n  \"kubernetesVersion\": \"<string>\",\n  \"deploymentCount\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-2ac8b4ec-478f-48b8-a887-04265173051c"
             },
             {
-              "id": "59496eb0-aae2-40af-9eaf-b3afbb2b15de",
+              "id": "0ea6b3c8-c8ff-48e8-a426-393149bc0749",
               "name": "Invalid request.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"region\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-0ea6b3c8-c8ff-48e8-a426-393149bc0749"
             },
             {
-              "id": "d732130a-0b9c-4f52-bde4-ee4017244398",
+              "id": "79dcf30a-9f56-4955-a0bb-1946574bd43a",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"region\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:31:56.000Z",
+              "updatedAt": "2026-10-22T01:31:56.000Z",
+              "uid": "35240-79dcf30a-9f56-4955-a0bb-1946574bd43a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "fd358078-85fd-4aa7-b946-e440a8c24555",
-          "name": "Jetic Get cluster details",
-          "request": {
-            "name": "Jetic Get cluster details",
-            "description": {
-              "content": "Retrieves details and status information for a connected Kubernetes cluster.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "clusters",
-                ":clusterId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "clusterId",
-                  "description": "(Required) Unique identifier of the cluster."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "954a849f-e662-49c6-af7f-4ecc3ac3377d",
-              "name": "Cluster details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"provider\": \"string\",\n  \"region\": \"string\",\n  \"camelBridgeStatus\": \"disconnected\",\n  \"kubernetesVersion\": \"string\",\n  \"deploymentCount\": 6441,\n  \"createdAt\": \"2006-04-08T07:24:48.877Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a92be13b-740a-41f5-901c-b7ddff815a1d",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d834da66-f4bb-48fe-b2f7-177774d42de3",
-              "name": "Cluster not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c358db9a-a94f-4e4f-98c9-258458cdf22b",
-          "name": "Jetic Remove a cluster",
-          "request": {
-            "name": "Jetic Remove a cluster",
-            "description": {
-              "content": "Disconnects and removes a Kubernetes cluster.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "clusters",
-                ":clusterId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "clusterId",
-                  "description": "(Required) Unique identifier of the cluster."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fdbc0d08-f844-45fa-9979-b28c5b8da620",
-              "name": "Cluster removed successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "7fb574e8-2677-45d5-8d63-87233835f2fd",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0dc25a29-392e-406b-93f6-dac7cf55afc9",
-              "name": "Cluster not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "21b4d94c-1182-45f6-9675-99da0092cfd5",
-          "name": "Jetic Get cluster status",
-          "request": {
-            "name": "Jetic Get cluster status",
-            "description": {
-              "content": "Retrieves the current health and status of the Camel Bridge on a connected cluster.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "clusters",
-                ":clusterId",
-                "status"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "clusterId",
-                  "description": "(Required) Unique identifier of the cluster."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "acbb8a42-1619-478b-abba-8445f8a2bf5d",
-              "name": "Cluster status.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId",
-                    "status"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"clusterId\": \"string\",\n  \"camelBridgeStatus\": \"connected\",\n  \"camelBridgeVersion\": \"string\",\n  \"camelKVersion\": \"string\",\n  \"activeDeployments\": 1006,\n  \"nodeCount\": 2908,\n  \"lastHeartbeat\": \"1993-11-13T18:39:32.417Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1cc81e9f-6e13-4516-b441-4d778b6fa279",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId",
-                    "status"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "b3779538-0911-4d4a-b977-9df25f81b0cd",
-              "name": "Cluster not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "clusters",
-                    ":clusterId",
-                    "status"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "clusterId",
-                      "description": "(Required) Unique identifier of the cluster."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:31:56.000Z",
+          "updatedAt": "2026-10-22T01:31:56.000Z",
+          "uid": "35240-4d3d76d4-c14a-44c8-b987-d1f23aad1691"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://app.us1.jetic.io/api/v1",
-      "key": "baseUrl"
+      "id": "91ace91e-5ed6-4ed0-af29-afbb38d9f666",
+      "createdAt": "2026-10-22T01:31:56.000Z",
+      "updatedAt": "2026-10-22T01:31:56.000Z",
+      "uid": "35240-91ace91e-5ed6-4ed0-af29-afbb38d9f666"
     }
   ],
   "auth": {
@@ -905,17 +832,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "8b6a3953-5fe4-4640-98c5-4979e85104f9",
-    "name": "Jetic Platform API Specifications Clusters API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.\n\nContact Support:\n Name: Jetic",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.us1.jetic.io/api/v1"
     }
-  }
+  ]
 }

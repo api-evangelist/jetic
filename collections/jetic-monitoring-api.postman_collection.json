@@ -1,513 +1,506 @@
 {
+  "info": {
+    "_postman_id": "5b6e118f-76dc-470b-a927-faa62cfafb50",
+    "name": "Jetic Platform Monitoring API",
+    "description": "The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.\n\nContact Support:\n Name: Jetic",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:32:14.000Z",
+    "updatedAt": "2026-10-22T01:32:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5b6e118f-76dc-470b-a927-faa62cfafb50"
+  },
   "item": [
     {
-      "id": "aa013233-22cc-4a39-b695-027e4ac09148",
-      "name": "Monitoring",
-      "description": {
-        "content": "Monitor integration status, logs, and metrics",
-        "type": "text/plain"
-      },
+      "name": "deployments",
       "item": [
         {
-          "id": "1697f365-2a8d-48de-84a9-93233c9d122c",
-          "name": "Jetic Get deployment logs",
-          "request": {
-            "name": "Jetic Get deployment logs",
-            "description": {
-              "content": "Retrieves build and execution logs for a deployment.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "deployments",
-                ":deploymentId",
-                "logs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "type",
-                  "value": "execution",
-                  "description": "Type of logs to retrieve."
-                },
-                {
-                  "disabled": false,
-                  "key": "since",
-                  "value": "<dateTime>",
-                  "description": "Retrieve logs since this timestamp."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "500",
-                  "description": "Maximum number of log lines."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "deploymentId",
-                  "description": "(Required) Unique identifier of the deployment."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{deploymentId}",
+          "item": [
             {
-              "id": "b4cba1c8-8ce0-406e-996a-84551c0c1a76",
-              "name": "Deployment logs.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "deployments",
-                    ":deploymentId",
-                    "logs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "type",
-                      "value": "execution"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "500"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "deploymentId",
-                      "description": "(Required) Unique identifier of the deployment."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+              "name": "logs",
+              "item": [
+                {
+                  "name": "Jetic Get deployment logs",
+                  "id": "d3e5b2cc-3b27-4356-b2de-a56921ac610a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/deployments/:deploymentId/logs?type=execution&since=<dateTime>&limit=500",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "deployments",
+                        ":deploymentId",
+                        "logs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Type of logs to retrieve.",
+                          "key": "type",
+                          "value": "execution"
+                        },
+                        {
+                          "description": "Retrieve logs since this timestamp.",
+                          "key": "since",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Maximum number of log lines.",
+                          "key": "limit",
+                          "value": "500"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "d647c1e9-ab50-43ad-9137-ab806516829e",
+                          "key": "deploymentId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the deployment."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves build and execution logs for a deployment."
+                  },
+                  "response": [
+                    {
+                      "id": "27a8e9d1-5cd2-4898-8341-2e4127944d65",
+                      "name": "Deployment logs.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/deployments/:deploymentId/logs?type=execution&since=<dateTime>&limit=500",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "deployments",
+                            ":deploymentId",
+                            "logs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Type of logs to retrieve.",
+                              "key": "type",
+                              "value": "execution"
+                            },
+                            {
+                              "description": "Retrieve logs since this timestamp.",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of log lines.",
+                              "key": "limit",
+                              "value": "500"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "deploymentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"deploymentId\": \"<string>\",\n  \"logType\": \"<string>\",\n  \"lines\": [\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"message\": \"<string>\",\n      \"level\": \"warn\"\n    },\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"message\": \"<string>\",\n      \"level\": \"error\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T01:32:14.000Z",
+                      "updatedAt": "2026-10-22T01:32:14.000Z",
+                      "uid": "35240-27a8e9d1-5cd2-4898-8341-2e4127944d65"
+                    },
+                    {
+                      "id": "c692b6a8-9a66-436b-a276-589591e42aef",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/deployments/:deploymentId/logs?type=execution&since=<dateTime>&limit=500",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "deployments",
+                            ":deploymentId",
+                            "logs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Type of logs to retrieve.",
+                              "key": "type",
+                              "value": "execution"
+                            },
+                            {
+                              "description": "Retrieve logs since this timestamp.",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of log lines.",
+                              "key": "limit",
+                              "value": "500"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "deploymentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:32:14.000Z",
+                      "updatedAt": "2026-10-22T01:32:14.000Z",
+                      "uid": "35240-c692b6a8-9a66-436b-a276-589591e42aef"
+                    },
+                    {
+                      "id": "5ae2d1fd-4daa-4281-9dd7-6266cfc856fd",
+                      "name": "Deployment not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/deployments/:deploymentId/logs?type=execution&since=<dateTime>&limit=500",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "deployments",
+                            ":deploymentId",
+                            "logs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Type of logs to retrieve.",
+                              "key": "type",
+                              "value": "execution"
+                            },
+                            {
+                              "description": "Retrieve logs since this timestamp.",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of log lines.",
+                              "key": "limit",
+                              "value": "500"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "deploymentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:32:14.000Z",
+                      "updatedAt": "2026-10-22T01:32:14.000Z",
+                      "uid": "35240-5ae2d1fd-4daa-4281-9dd7-6266cfc856fd"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:32:14.000Z",
+                  "updatedAt": "2026-10-22T01:32:14.000Z",
+                  "uid": "35240-d3e5b2cc-3b27-4356-b2de-a56921ac610a"
                 }
               ],
-              "body": "{\n  \"deploymentId\": \"string\",\n  \"logType\": \"string\",\n  \"lines\": [\n    {\n      \"timestamp\": \"2006-02-10T00:49:45.752Z\",\n      \"message\": \"string\",\n      \"level\": \"info\"\n    },\n    {\n      \"timestamp\": \"1988-03-09T08:53:11.034Z\",\n      \"message\": \"string\",\n      \"level\": \"error\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "9f2f0c7a-a6ac-413f-b31c-e18a42afe661",
+              "createdAt": "2026-10-22T01:32:14.000Z",
+              "updatedAt": "2026-10-22T01:32:14.000Z",
+              "uid": "35240-9f2f0c7a-a6ac-413f-b31c-e18a42afe661"
             },
             {
-              "id": "c15d75d0-a01d-4654-8485-1b4bd425ad9e",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "deployments",
-                    ":deploymentId",
-                    "logs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "type",
-                      "value": "execution"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "500"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "deploymentId",
-                      "description": "(Required) Unique identifier of the deployment."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "name": "metrics",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "Jetic Get deployment metrics",
+                  "id": "27909337-7835-4dec-a4a0-5a68ecc091c9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/deployments/:deploymentId/metrics?from=<dateTime>&to=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "deployments",
+                        ":deploymentId",
+                        "metrics"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start of the metrics time range.",
+                          "key": "from",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End of the metrics time range.",
+                          "key": "to",
+                          "value": "<dateTime>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "fa34862b-36aa-4f79-88a4-fb10c53222d6",
+                          "key": "deploymentId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the deployment."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves performance metrics for a running deployment including message throughput and data visualization data."
+                  },
+                  "response": [
+                    {
+                      "id": "75504e24-9f11-48d5-a5af-f846939a5fca",
+                      "name": "Deployment metrics.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/deployments/:deploymentId/metrics?from=<dateTime>&to=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "deployments",
+                            ":deploymentId",
+                            "metrics"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start of the metrics time range.",
+                              "key": "from",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End of the metrics time range.",
+                              "key": "to",
+                              "value": "<dateTime>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "deploymentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"deploymentId\": \"<string>\",\n  \"messagesProcessed\": \"<integer>\",\n  \"messagesPerSecond\": \"<number>\",\n  \"errorCount\": \"<integer>\",\n  \"averageLatencyMs\": \"<number>\",\n  \"cpuUsage\": \"<number>\",\n  \"memoryUsageMb\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T01:32:14.000Z",
+                      "updatedAt": "2026-10-22T01:32:14.000Z",
+                      "uid": "35240-75504e24-9f11-48d5-a5af-f846939a5fca"
+                    },
+                    {
+                      "id": "cf358b31-0225-47fe-81c3-39170434a240",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/deployments/:deploymentId/metrics?from=<dateTime>&to=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "deployments",
+                            ":deploymentId",
+                            "metrics"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start of the metrics time range.",
+                              "key": "from",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End of the metrics time range.",
+                              "key": "to",
+                              "value": "<dateTime>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "deploymentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:32:14.000Z",
+                      "updatedAt": "2026-10-22T01:32:14.000Z",
+                      "uid": "35240-cf358b31-0225-47fe-81c3-39170434a240"
+                    },
+                    {
+                      "id": "dd89753b-b61c-490e-a8e6-a3cf3eb8f353",
+                      "name": "Deployment not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/deployments/:deploymentId/metrics?from=<dateTime>&to=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "deployments",
+                            ":deploymentId",
+                            "metrics"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start of the metrics time range.",
+                              "key": "from",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End of the metrics time range.",
+                              "key": "to",
+                              "value": "<dateTime>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "deploymentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:32:14.000Z",
+                      "updatedAt": "2026-10-22T01:32:14.000Z",
+                      "uid": "35240-dd89753b-b61c-490e-a8e6-a3cf3eb8f353"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:32:14.000Z",
+                  "updatedAt": "2026-10-22T01:32:14.000Z",
+                  "uid": "35240-27909337-7835-4dec-a4a0-5a68ecc091c9"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "190c8255-adfe-48a6-9955-6245eb482337",
-              "name": "Deployment not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "deployments",
-                    ":deploymentId",
-                    "logs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "type",
-                      "value": "execution"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "500"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "deploymentId",
-                      "description": "(Required) Unique identifier of the deployment."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "48c42dd5-1a7f-498b-9c38-0992d5700bd9",
+              "createdAt": "2026-10-22T01:32:14.000Z",
+              "updatedAt": "2026-10-22T01:32:14.000Z",
+              "uid": "35240-48c42dd5-1a7f-498b-9c38-0992d5700bd9"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3f7f2fc7-bb58-423f-b14a-6465a4bceec9",
-          "name": "Jetic Get deployment metrics",
-          "request": {
-            "name": "Jetic Get deployment metrics",
-            "description": {
-              "content": "Retrieves performance metrics for a running deployment including message throughput and data visualization data.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "deployments",
-                ":deploymentId",
-                "metrics"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "from",
-                  "value": "<dateTime>",
-                  "description": "Start of the metrics time range."
-                },
-                {
-                  "disabled": false,
-                  "key": "to",
-                  "value": "<dateTime>",
-                  "description": "End of the metrics time range."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "deploymentId",
-                  "description": "(Required) Unique identifier of the deployment."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "546cdef8-12ba-4492-b35c-de9a962d644e",
-              "name": "Deployment metrics.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "deployments",
-                    ":deploymentId",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "from",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "to",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "deploymentId",
-                      "description": "(Required) Unique identifier of the deployment."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"deploymentId\": \"string\",\n  \"messagesProcessed\": 6463,\n  \"messagesPerSecond\": 3598.3603344272365,\n  \"errorCount\": 4349,\n  \"averageLatencyMs\": 2840.090426199846,\n  \"cpuUsage\": 7766.122719247464,\n  \"memoryUsageMb\": 1783.580858289685\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4a871805-f500-4585-a09e-e9d3194b1554",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "deployments",
-                    ":deploymentId",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "from",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "to",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "deploymentId",
-                      "description": "(Required) Unique identifier of the deployment."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0dec0df5-f47b-4918-b12a-b3aa2a5c699e",
-              "name": "Deployment not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "deployments",
-                    ":deploymentId",
-                    "metrics"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "from",
-                      "value": "<dateTime>"
-                    },
-                    {
-                      "key": "to",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "deploymentId",
-                      "description": "(Required) Unique identifier of the deployment."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "4581703f-ab2a-4f24-9015-3c3930de82e1",
+          "createdAt": "2026-10-22T01:32:14.000Z",
+          "updatedAt": "2026-10-22T01:32:14.000Z",
+          "uid": "35240-4581703f-ab2a-4f24-9015-3c3930de82e1"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://app.us1.jetic.io/api/v1",
-      "key": "baseUrl"
+      "id": "2f9b4d4e-1492-4b12-a90b-7c88bc6a81c7",
+      "createdAt": "2026-10-22T01:32:14.000Z",
+      "updatedAt": "2026-10-22T01:32:14.000Z",
+      "uid": "35240-2f9b4d4e-1492-4b12-a90b-7c88bc6a81c7"
     }
   ],
   "auth": {
@@ -515,17 +508,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "5bf2206d-dd77-4e6c-8108-8034f68339aa",
-    "name": "Jetic Platform API Specifications Monitoring API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.\n\nContact Support:\n Name: Jetic",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.us1.jetic.io/api/v1"
     }
-  }
+  ]
 }

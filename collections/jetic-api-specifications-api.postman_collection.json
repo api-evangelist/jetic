@@ -1,115 +1,679 @@
 {
+  "info": {
+    "_postman_id": "5da88a7b-ec43-4bee-af85-66726f3da85f",
+    "name": "Jetic Platform API Specifications API",
+    "description": "The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.\n\nContact Support:\n Name: Jetic",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:31:45.000Z",
+    "updatedAt": "2026-10-22T01:31:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5da88a7b-ec43-4bee-af85-66726f3da85f"
+  },
   "item": [
     {
-      "id": "b85fc7bf-5d8b-4c63-9371-553c305d273b",
-      "name": "API Specifications",
-      "description": {
-        "content": "Manage OpenAPI specifications via the API Builder",
-        "type": "text/plain"
-      },
+      "name": "api-specifications",
       "item": [
         {
-          "id": "988dafd4-7569-4c28-bf7a-f5613f06955e",
-          "name": "Jetic List API specifications",
-          "request": {
-            "name": "Jetic List API specifications",
-            "description": {
-              "content": "Retrieves all OpenAPI specifications managed in the API Builder.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api-specifications"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "20"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{specificationId}",
+          "item": [
             {
-              "id": "4f15827a-3aac-4aef-a82f-e6a51678faa7",
-              "name": "A list of API specifications.",
-              "originalRequest": {
+              "name": "Jetic Get an API specification",
+              "id": "2546359b-012c-41fc-8d60-92e4b2d57ab0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "api-specifications"
-                  ],
+                  "raw": "{{baseUrl}}/api-specifications/:specificationId",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
+                  "path": [
+                    "api-specifications",
+                    ":specificationId"
+                  ],
+                  "variable": [
                     {
-                      "key": "page",
-                      "value": "1"
-                    },
+                      "id": "196fd01a-c7d7-48a3-a064-5a6dd1951486",
+                      "key": "specificationId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the API specification."
+                    }
+                  ]
+                },
+                "description": "Retrieves a specific OpenAPI specification."
+              },
+              "response": [
+                {
+                  "id": "2a0d1886-2c4a-4f93-b005-0d4ebb5c5455",
+                  "name": "API specification details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "limit",
-                      "value": "20"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": []
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"openApiVersion\": \"3.1\",\n  \"paths\": \"<integer>\",\n  \"integrationId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-2a0d1886-2c4a-4f93-b005-0d4ebb5c5455"
                 },
+                {
+                  "id": "b1eca7eb-737b-476e-bb0b-a87d0dabfd51",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-b1eca7eb-737b-476e-bb0b-a87d0dabfd51"
+                },
+                {
+                  "id": "30db5f8e-4ea8-4430-a48c-bcab5d4f7d24",
+                  "name": "Specification not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-30db5f8e-4ea8-4430-a48c-bcab5d4f7d24"
+                }
+              ],
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-2546359b-012c-41fc-8d60-92e4b2d57ab0"
+            },
+            {
+              "name": "Jetic Update an API specification",
+              "id": "fdeeba90-844b-4b41-828a-920c862d21fc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"version\": \"string\",\n      \"openApiVersion\": \"3.0\",\n      \"paths\": 8952,\n      \"integrationId\": \"string\",\n      \"createdAt\": \"1992-09-02T23:41:31.204Z\",\n      \"updatedAt\": \"2021-04-18T20:11:22.887Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"version\": \"string\",\n      \"openApiVersion\": \"3.0\",\n      \"paths\": 4661,\n      \"integrationId\": \"string\",\n      \"createdAt\": \"1997-04-11T00:41:24.928Z\",\n      \"updatedAt\": \"1960-04-19T15:02:42.448Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 9027,\n    \"limit\": 9548,\n    \"total\": 3930,\n    \"totalPages\": 8231\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5135bb87-728e-4de2-aa5b-7374fcb929aa",
-              "name": "Unauthorized.",
-              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
-                  "path": [
-                    "api-specifications"
-                  ],
+                  "raw": "{{baseUrl}}/api-specifications/:specificationId",
                   "host": [
                     "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-specifications",
+                    ":specificationId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8e2e7cb2-66c1-4cf2-a84f-61069578a11b",
+                      "key": "specificationId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the API specification."
+                    }
+                  ]
+                },
+                "description": "Updates an existing OpenAPI specification."
+              },
+              "response": [
+                {
+                  "id": "f038c2d4-de36-4906-8ffc-948deebaea46",
+                  "name": "Specification updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"openApiVersion\": \"3.1\",\n  \"paths\": \"<integer>\",\n  \"integrationId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-f038c2d4-de36-4906-8ffc-948deebaea46"
+                },
+                {
+                  "id": "52d93e76-8d8d-47aa-af80-bda6f4629857",
+                  "name": "Invalid request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-52d93e76-8d8d-47aa-af80-bda6f4629857"
+                },
+                {
+                  "id": "8ee165eb-78bc-4ffd-b9c2-be18f53f043e",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-8ee165eb-78bc-4ffd-b9c2-be18f53f043e"
+                },
+                {
+                  "id": "9139562f-4d6c-4131-adfa-fec6b4607e42",
+                  "name": "Specification not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-9139562f-4d6c-4131-adfa-fec6b4607e42"
+                }
+              ],
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-fdeeba90-844b-4b41-828a-920c862d21fc"
+            },
+            {
+              "name": "Jetic Delete an API specification",
+              "id": "e9880aea-327c-4615-8be3-f8d7d851c576",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-specifications",
+                    ":specificationId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e9818d48-9df2-4fd0-b924-bf8786ea6178",
+                      "key": "specificationId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the API specification."
+                    }
+                  ]
+                },
+                "description": "Deletes an OpenAPI specification from the API Builder."
+              },
+              "response": [
+                {
+                  "id": "985008b9-6fd5-4ad9-a868-8e4dbf2da605",
+                  "name": "Specification deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-985008b9-6fd5-4ad9-a868-8e4dbf2da605"
+                },
+                {
+                  "id": "4d41c839-b637-4043-b85b-8788e8e40627",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-4d41c839-b637-4043-b85b-8788e8e40627"
+                },
+                {
+                  "id": "30958d08-8673-48f4-b1ad-901a2c265bcb",
+                  "name": "Specification not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-specifications/:specificationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-specifications",
+                        ":specificationId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "specificationId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:31:46.000Z",
+                  "updatedAt": "2026-10-22T01:31:46.000Z",
+                  "uid": "35240-30958d08-8673-48f4-b1ad-901a2c265bcb"
+                }
+              ],
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-e9880aea-327c-4615-8be3-f8d7d851c576"
+            }
+          ],
+          "id": "c5fddad8-2e25-4d01-be03-7c796706d25c",
+          "createdAt": "2026-10-22T01:31:46.000Z",
+          "updatedAt": "2026-10-22T01:31:46.000Z",
+          "uid": "35240-c5fddad8-2e25-4d01-be03-7c796706d25c"
+        },
+        {
+          "name": "Jetic List API specifications",
+          "id": "5b01d64e-60ab-498c-9850-2e952952cd34",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api-specifications?page=1&limit=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api-specifications"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Retrieves all OpenAPI specifications managed in the API Builder."
+          },
+          "response": [
+            {
+              "id": "b514d948-6ca0-4614-866d-7034f7fb679f",
+              "name": "A list of API specifications.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-specifications?page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-specifications"
                   ],
                   "query": [
                     {
@@ -120,59 +684,81 @@
                       "key": "limit",
                       "value": "20"
                     }
-                  ],
-                  "variable": []
-                },
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"version\": \"<string>\",\n      \"openApiVersion\": \"3.1\",\n      \"paths\": \"<integer>\",\n      \"integrationId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"version\": \"<string>\",\n      \"openApiVersion\": \"3.0\",\n      \"paths\": \"<integer>\",\n      \"integrationId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": \"<integer>\",\n    \"limit\": \"<integer>\",\n    \"total\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-b514d948-6ca0-4614-866d-7034f7fb679f"
+            },
+            {
+              "id": "dc4889a0-c7b3-4384-8692-24ee41156f36",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/api-specifications?page=1&limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-specifications"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-dc4889a0-c7b3-4384-8692-24ee41156f36"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:31:46.000Z",
+          "updatedAt": "2026-10-22T01:31:46.000Z",
+          "uid": "35240-5b01d64e-60ab-498c-9850-2e952952cd34"
         },
         {
-          "id": "7a5f8194-627e-406c-b177-baa3dce9419d",
           "name": "Jetic Create or import an API specification",
+          "id": "07b15846-3e46-4b27-aa00-de829b9c684c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Jetic Create or import an API specification",
-            "description": {
-              "content": "Creates a new OpenAPI specification or imports an existing one into the API Builder.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api-specifications"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -183,839 +769,188 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"1.0.0\",\n  \"importUrl\": \"<string>\",\n  \"importContent\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api-specifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api-specifications"
+              ]
+            },
+            "description": "Creates a new OpenAPI specification or imports an existing one into the API Builder."
           },
           "response": [
             {
-              "id": "eeb65269-ea93-47d0-821e-8e71211730b8",
+              "id": "9c42d242-cd51-4253-90f2-885872265d42",
               "name": "API specification created.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"1.0.0\",\n  \"importUrl\": \"<string>\",\n  \"importContent\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api-specifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-specifications"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"version\": \"string\",\n  \"openApiVersion\": \"3.1\",\n  \"paths\": 1329,\n  \"integrationId\": \"string\",\n  \"createdAt\": \"2005-08-10T11:30:19.909Z\",\n  \"updatedAt\": \"2024-04-03T18:04:04.794Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"openApiVersion\": \"3.1\",\n  \"paths\": \"<integer>\",\n  \"integrationId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-9c42d242-cd51-4253-90f2-885872265d42"
             },
             {
-              "id": "5ae89593-9ffd-43c4-8100-4100cad85c00",
+              "id": "a28421bb-ac14-4deb-8b62-2cd264c5b976",
               "name": "Invalid request or specification.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"1.0.0\",\n  \"importUrl\": \"<string>\",\n  \"importContent\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api-specifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-specifications"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-a28421bb-ac14-4deb-8b62-2cd264c5b976"
             },
             {
-              "id": "3d838988-ff3f-4ec7-a4f5-5b6f55620f06",
+              "id": "a5bdf44b-4f70-4c94-857a-5d73b85a59a0",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"1.0.0\",\n  \"importUrl\": \"<string>\",\n  \"importContent\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api-specifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-specifications"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T01:31:46.000Z",
+              "updatedAt": "2026-10-22T01:31:46.000Z",
+              "uid": "35240-a5bdf44b-4f70-4c94-857a-5d73b85a59a0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "10c8ee3c-47d0-43f3-84c4-aebd7bd93e00",
-          "name": "Jetic Get an API specification",
-          "request": {
-            "name": "Jetic Get an API specification",
-            "description": {
-              "content": "Retrieves a specific OpenAPI specification.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api-specifications",
-                ":specificationId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "specificationId",
-                  "description": "(Required) Unique identifier of the API specification."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b2eb93a6-7cc0-4ddc-8532-225b2a64d375",
-              "name": "API specification details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"version\": \"string\",\n  \"openApiVersion\": \"3.1\",\n  \"paths\": 1329,\n  \"integrationId\": \"string\",\n  \"createdAt\": \"2005-08-10T11:30:19.909Z\",\n  \"updatedAt\": \"2024-04-03T18:04:04.794Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e9b3bc85-b880-4c1e-9763-e98cc59c22b2",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "5bbea8d3-bc60-415b-85bf-52a138dc7f5e",
-              "name": "Specification not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1e818f07-62e0-4dbb-9316-c97013d2f02b",
-          "name": "Jetic Update an API specification",
-          "request": {
-            "name": "Jetic Update an API specification",
-            "description": {
-              "content": "Updates an existing OpenAPI specification.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api-specifications",
-                ":specificationId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "specificationId",
-                  "description": "(Required) Unique identifier of the API specification."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "0867fc1a-a4d8-4c97-ad83-0acca55434c7",
-              "name": "Specification updated.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"version\": \"string\",\n  \"openApiVersion\": \"3.1\",\n  \"paths\": 1329,\n  \"integrationId\": \"string\",\n  \"createdAt\": \"2005-08-10T11:30:19.909Z\",\n  \"updatedAt\": \"2024-04-03T18:04:04.794Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cf2a2744-da4e-4b25-8725-e853f82db0d4",
-              "name": "Invalid request.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "1bf3c42a-0b0c-40aa-a12a-365e3b810084",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "47e5bf45-5665-491e-a74f-3e2d1694903b",
-              "name": "Specification not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"version\": \"<string>\",\n  \"content\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "dc211e3b-78f0-4a26-9758-19e790d9d995",
-          "name": "Jetic Delete an API specification",
-          "request": {
-            "name": "Jetic Delete an API specification",
-            "description": {
-              "content": "Deletes an OpenAPI specification from the API Builder.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api-specifications",
-                ":specificationId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "specificationId",
-                  "description": "(Required) Unique identifier of the API specification."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4d33d2e6-9b77-4e08-9b85-01011025aa19",
-              "name": "Specification deleted.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "42d2134d-f6df-41ac-9afc-3bb6440bd9fe",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "de68f99d-9830-40b2-9825-afd3bd186308",
-              "name": "Specification not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api-specifications",
-                    ":specificationId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "specificationId",
-                      "description": "(Required) Unique identifier of the API specification."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:31:46.000Z",
+          "updatedAt": "2026-10-22T01:31:46.000Z",
+          "uid": "35240-07b15846-3e46-4b27-aa00-de829b9c684c"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://app.us1.jetic.io/api/v1",
-      "key": "baseUrl"
+      "id": "fa1854e0-112a-45f3-8259-8d652db26b77",
+      "createdAt": "2026-10-22T01:31:46.000Z",
+      "updatedAt": "2026-10-22T01:31:46.000Z",
+      "uid": "35240-fa1854e0-112a-45f3-8259-8d652db26b77"
     }
   ],
   "auth": {
@@ -1023,17 +958,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e5526d89-5f28-4205-961d-8d49241942e1",
-    "name": "Jetic Platform API Specifications API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Jetic Platform API provides programmatic access to manage integrations, deployments, clusters, and API specifications on the Jetic cloud-native Integration Platform. Jetic is built on Apache Camel and Kubernetes, enabling users to design, build, deploy, and monitor integrations and REST APIs.\n\nContact Support:\n Name: Jetic",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://app.us1.jetic.io/api/v1"
     }
-  }
+  ]
 }
